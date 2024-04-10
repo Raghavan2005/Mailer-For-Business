@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mailer For Business", "Mailer For Business\Mailer For Business.csproj", "{808342B9-C772-4EB9-8321-77FC77C93391}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{808342B9-C772-4EB9-8321-77FC77C93391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808342B9-C772-4EB9-8321-77FC77C93391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808342B9-C772-4EB9-8321-77FC77C93391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808342B9-C772-4EB9-8321-77FC77C93391}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A566A32-3197-452F-98A6-129693D3D718}
+	EndGlobalSection
+EndGlobal
