@@ -1,0 +1,26 @@
+﻿<Window x:Class="Mailer_For_Business.Windows.Dash.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
+        mc:Ignorable="d" AllowsTransparency="True"
+        Title="CustomMessageBox" Height="150" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\massage.png"/>
+    </Window.Background>
+    <Grid  Margin="10">
+        <StackPanel>
+            <TextBlock x:Name="titletext" Width="auto" Height="auto"  Text="Error" Margin="5,10,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <TextBlock x:Name="massagetext" Width="auto" Height="auto"  Text="Your custom message here." Margin="5,10,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+        </StackPanel>   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="OK" Width="75" VerticalAlignment="Bottom" Margin="5" Height="30" Click="OKButton_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Arial Rounded MT Bold">
+                <Button.Background>
+                    <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\btn.png"/>
+                </Button.Background>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Window>

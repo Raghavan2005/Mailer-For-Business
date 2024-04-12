@@ -10,7 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Resource\" />
+    <None Remove="Windows\Loader\logo.png" />
+    <None Remove="Windows\Loader\Rectangle 12.png" />
+    <None Remove="Windows\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Windows\Loader\logo.png" />
+    <Resource Include="Windows\Loader\Rectangle 12.png" />
+    <Resource Include="Windows\logo.png" />
   </ItemGroup>
 
 </Project>

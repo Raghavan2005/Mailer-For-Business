@@ -1,0 +1,211 @@
+﻿<Window x:Class="Mailer_For_Business.Windows.Dash.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen"
+        Background="#353643"
+      
+        Title="Dashboard" Height="750" Width="1400" Icon="/Windows/logo.png" MinWidth="500" MinHeight="600">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="10" CaptionHeight="0" ></WindowChrome>
+    </WindowChrome.WindowChrome>
+
+
+    <Grid Cursor="Hand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"  ></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Background="#3A3D4C">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Image Margin="5,5,5,5" Source="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\TitleLogo.png"></Image>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="#3A3D4C" >
+
+                <Image  Source="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\help.png" Height="25" Width="40" Margin="0,0,10,0"  VerticalAlignment="Center" MouseDown="Imagehelp_MouseDown">
+                    <Image.ToolTip>
+                        <StackPanel Margin="5,5,5,5" >
+                            <TextBlock>Click To Visit For Help Center.</TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+                <Image  Source="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\settings.png" Height="25" Width="40" Margin="0,0,10,0" VerticalAlignment="Center" MouseDown="Imagesettings_MouseDown">
+                    <Image.ToolTip>
+                        <StackPanel Margin="5,5,5,5" >
+                            <TextBlock>Settings</TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+                <Button x:Name="btnMin" Content="-" FontSize="20" Width="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMin_Click" />
+                <Button x:Name="btnMax" Content="□" FontSize="20"  Width="40"  BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMax_Click" />
+                <Button  MouseEnter="btn_MouseEnter" FontSize="20"  x:Name="btnClose" Content="X" Width="40" Height="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnClose_Click"  />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="60*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*">
+
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="60*">
+
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="1" Background="#3A3D4C" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,50,10,5">
+
+                    <Grid AllowDrop="True" Drop="Grid_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="resetimport" Click="resetimport_Click" Width="19"  HorizontalAlignment="Right" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Clear All The Import Files" Margin="0,0,0,6"  >
+                            <Button.Background>
+                                <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\resetbtn.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Image Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\draganddrop.png" Margin="109,10,109,68"></Image>
+
+                        <TextBlock Grid.Row="1"  Text="OR" VerticalAlignment="Bottom" Margin="0,0,0,40" HorizontalAlignment="Center" FontSize="15" Foreground="White" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" ></TextBlock>
+
+                        <Button Grid.Row="1" Padding="10,10,10,10"  Width="Auto" Height="Auto"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Black"  >
+                            <Button.Background>
+                                <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\btn.png"/>
+                            </Button.Background>
+                        </Button>
+
+
+                    </Grid>
+
+                </Border>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="0,15,0,0">
+                    <Label Content="File Format :" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
+
+                    <ComboBox  Margin="2,0,0,0" Name="filetype" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="20" BorderBrush="{x:Null}" Foreground="Black" SelectionChanged="filetype_SelectionChanged">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF00EDFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                        <ComboBoxItem Content="CSV"></ComboBoxItem>
+                        <ComboBoxItem Content="XLSX"></ComboBoxItem>
+
+                    </ComboBox>
+
+                </StackPanel>
+                <Border Grid.Column="0" Background="#3A3D4C" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,5,0,0">
+
+                    <Grid>
+
+
+                        <StackPanel Margin="0,0,0,0" Grid.RowSpan="2" Height="auto">
+
+                            <CheckBox  Content="Auto File Type" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" IsEnabled="True" Foreground="White" FontFamily="Bahnschrift Light Condensed" IsChecked="True" AutomationProperties.Name="autofiletype" Name="autofiletype" Click="CheckBox_Clicked" Height="15" Width="97" FontSize="16"/>
+
+                            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                <Border Background="#FF353643" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,0,0">
+                                    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Label Content="File Format "  HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Condensed" FontSize="16" FontWeight="Bold"/>
+                                        <Label Content="Select The File" x:Name="filetypetxt" HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel >
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Stretch" Height="auto" HorizontalAlignment="Stretch">
+                                <Label Content="Total Row Found        :" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Stretch" Foreground="White" FontFamily="Bahnschrift Condensed" FontSize="16"    FontWeight="Bold"/>
+                                <Label Content="0" x:Name="rowcount" HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Height="auto" HorizontalAlignment="Stretch">
+                                <Label Content="Total Column Found  :"  HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Condensed" FontSize="16" FontWeight="Bold"/>
+                                <Label Content="0" x:Name="columncount"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0"  HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" ToolTip="Pending">
+                                    <Ellipse Width="5" Height="5" Fill="#FFE0FF00"/>
+                                    <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" ToolTip="Success" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Ellipse Width="5" Height="5" Fill="#FF03FF00"/>
+                                    <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" ToolTip="Invailed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Ellipse Width="5" Height="5" Fill="Red"/>
+                                    <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="auto">
+                                <Border Grid.Column="0" Background="#FF9D8E07" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" Margin="0,0,10,0" >
+                                    <Button Grid.Row="1" Padding="2,2,2,2"  Width="60" Height="35"  Content="Test" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="{x:Null}"  >
+                                    </Button>
+                                </Border>
+                                <Border Grid.Column="0" Background="#FF3AC02D"  BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Margin="0,0,10,0" >
+                                    <Button Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Start" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="#FF3AC02D"  >
+                                    </Button>
+                                </Border>
+
+                                <Border Grid.Column="0" Background="#FFEE0A0A"  BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Stop ALL" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="{x:Null}"  >
+                                    </Button>
+                                </Border>
+
+
+
+
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+
+            </Grid>
+
+            <Border Grid.Column="0" Grid.Row="1" Background="#3A3D4C" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,10,10">
+
+                <Grid>
+
+                    <TabControl>
+                        <!-- Tab for displaying CSV data -->
+                        <TabItem x:Name="header" Header="CSV" >
+                            <DataGrid Name="csvDataGrid" AutoGenerateColumns="True" Margin="0" />
+                        </TabItem>
+
+                    </TabControl>
+                </Grid>
+
+            </Border>
+
+            <Border Background="blue" Grid.Column="2" Grid.Row="0"></Border>
+
+            <Border Background="Yellow" Grid.Column="2" Grid.Row="1"></Border>
+
+
+
+
+
+
+
+
+
+        </Grid>
+
+    </Grid>
+
+</Window>
