@@ -29,7 +29,7 @@ namespace Mailer_For_Business.Windows.Dash
     public partial class Dashboard : Window
     {
         string files;
-        int totolfileselected = 0;
+     //  int totolfileselected = 0;
         int Totolrowcount = 1;
         int Totalcolumncount = 1;
         DataSet csvDataSet, xlsxDataSet;
@@ -60,9 +60,18 @@ namespace Mailer_For_Business.Windows.Dash
         private void btnMax_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
-            else WindowState = WindowState.Maximized;
+            else {
+                MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+                MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+                WindowState = WindowState.Maximized;
+                    
+                    };
         }
+        //window states
+        
 
+
+        //
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -204,12 +213,13 @@ namespace Mailer_For_Business.Windows.Dash
 
         private void resetimport_Click(object sender, RoutedEventArgs e)
         {
-            totolfileselected = 0;
-            Totolrowcount = 0;
+           Totolrowcount = 0;
           Totalcolumncount = 0;
             //statustext.Text = "Please Select File Format : (.csv //.xlsx)";
-             //files = new string;
-
+            csvDataGrid.ItemsSource =" ";
+            textupdateui();
+            files = "";
+            filetypetxt.Content ="Select The File";
         }
 
       void textupdateui()
@@ -220,6 +230,7 @@ namespace Mailer_For_Business.Windows.Dash
                 filetypetxt.Content = filenames.ToString() + "."+ typestate.ToLower();
                 rowcount.Content = Totolrowcount.ToString();
                 columncount.Content = Totalcolumncount.ToString();
+                pendingtxt.Content = "0/" + Totolrowcount.ToString();
 
 
             }

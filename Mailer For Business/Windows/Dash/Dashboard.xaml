@@ -9,7 +9,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         Background="#353643"
-      
+       
         Title="Dashboard" Height="750" Width="1400" Icon="/Windows/logo.png" MinWidth="500" MinHeight="600">
 
     <WindowChrome.WindowChrome>
@@ -66,26 +66,24 @@
 
                     </ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Row="0" Grid.Column="1" Background="#3A3D4C" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,50,10,5">
+                <Border Grid.Row="0" Grid.Column="1" Background="#3A3D4C" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,50,10,5">
 
                     <Grid AllowDrop="True" Drop="Grid_Drop">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button x:Name="resetimport" Click="resetimport_Click" Width="19"  HorizontalAlignment="Right" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Clear All The Import Files" Margin="0,0,0,6"  >
+
+                        <Button x:Name="resetimport" Click="resetimport_Click" Width="25" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Right" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Clear All The Import Files" Margin="0,0,0,193"  >
                             <Button.Background>
                                 <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\resetbtn.png"/>
                             </Button.Background>
                         </Button>
                         <Image Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\draganddrop.png" Margin="109,10,109,68"></Image>
-
+                        <TextBlock Grid.Row="1"  Text="Drag and Drop" VerticalAlignment="Bottom" Margin="0,0,0,60" HorizontalAlignment="Center" FontSize="12" Foreground="#FF00FFED" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" Opacity="0.8" ></TextBlock>
                         <TextBlock Grid.Row="1"  Text="OR" VerticalAlignment="Bottom" Margin="0,0,0,40" HorizontalAlignment="Center" FontSize="15" Foreground="White" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" ></TextBlock>
 
                         <Button Grid.Row="1" Padding="10,10,10,10"  Width="Auto" Height="Auto"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Black"  >
                             <Button.Background>
                                 <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\btn.png"/>
                             </Button.Background>
+
                         </Button>
 
 
@@ -105,6 +103,7 @@
                         </ComboBox.Background>
                         <ComboBoxItem Content="CSV"></ComboBoxItem>
                         <ComboBoxItem Content="XLSX"></ComboBoxItem>
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" BorderBrush="{x:Null}"/>
 
                     </ComboBox>
 
@@ -123,6 +122,7 @@
                                     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                         <Label Content="File Format "  HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Condensed" FontSize="16" FontWeight="Bold"/>
                                         <Label Content="Select The File" x:Name="filetypetxt" HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+
                                     </StackPanel>
                                 </Border>
                             </StackPanel >
@@ -137,7 +137,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,20,0,0"  HorizontalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" ToolTip="Pending">
                                     <Ellipse Width="5" Height="5" Fill="#FFE0FF00"/>
-                                    <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                    <Label x:Name="pendingtxt" Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" ToolTip="Success" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <Ellipse Width="5" Height="5" Fill="#FF03FF00"/>
@@ -155,7 +155,7 @@
                                     </Button>
                                 </Border>
                                 <Border Grid.Column="0" Background="#FF3AC02D"  BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Margin="0,0,10,0" >
-                                    <Button Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Start" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="#FF3AC02D"  >
+                                    <Button Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Send" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="#FF3AC02D"  >
                                     </Button>
                                 </Border>
 
@@ -177,17 +177,24 @@
 
             </Grid>
 
-            <Border Grid.Column="0" Grid.Row="1" Background="#3A3D4C" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,10,10">
+            <Border Grid.Column="0" Grid.Row="1" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,10,10" Background="#FF3A3D4C">
 
                 <Grid>
+                   
+                    <TabControl Background="White" BorderBrush="#FFACACAC" Foreground="Black" FontFamily="Cascadia Mono ExtraLight">
 
-                    <TabControl>
-                        <!-- Tab for displaying CSV data -->
-                        <TabItem x:Name="header" Header="CSV" >
-                            <DataGrid Name="csvDataGrid" AutoGenerateColumns="True" Margin="0" />
+                        
+                        <TabItem  x:Name="header" Header="CSV" BorderBrush="{x:Null}" Foreground="Black" Background="#FF3A3D4C" Margin="-2,-2,-46,0" FontFamily="Arial Rounded MT Bold" FontSize="14" Cursor="Arrow" >
+                            
+                            
+                                <DataGrid Name="csvDataGrid" AutoGenerateColumns="True" Margin="0" BorderBrush="{x:Null}" Background="#FFCEC7C7" FontFamily="Candara Light" />
+                      
                         </TabItem>
 
                     </TabControl>
+                    
+                        <Label Content="Data Viewer and Editor" VerticalAlignment="Top" HorizontalAlignment="Right" Background="White" Foreground="#FF252525" FontFamily="Arial Rounded MT Bold" FontSize="14" Cursor="Arrow"/>
+                    
                 </Grid>
 
             </Border>
