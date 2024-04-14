@@ -29,28 +29,28 @@
                 <Image Margin="5,5,5,5" Source="/Windows/Dash/TitleLogo.png"></Image>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Background="#3A3D4C" >
-                <Border Grid.Column="0" Margin="0,10,20,0"  Background="#FF0A28EE"  BorderBrush="Transparent" Height='30' Width="60" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                <Border Grid.Column="0" Margin="0,10,20,0"  Background="#FF08198D"  BorderBrush="Transparent" Height='30' Width="60" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
                     <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Guide" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
                     </Button>
                 </Border>
-                <Border Grid.Column="0" Margin="0,10,20,0" Background="#FF0AEEE6"  BorderBrush="Transparent" Height='30' Width="60"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                <Border Grid.Column="0" Margin="0,10,20,0" Background="#FF047C78"  BorderBrush="Transparent" Height='30' Width="60"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
                     <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Config" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
                     </Button>
                 </Border>
                 <Border Grid.Column="0" Background="#FF9D8E07" BorderThickness="1,1,1,1" Height='30' CornerRadius="5,5,5,5" Width="60" Margin="0,10,10,0" >
-                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60" Height="auto"  Content="Test" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" Background="{x:Null}"  />
+                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60" Height="auto"  Content="Test" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" Background="{x:Null}"  />
                 </Border>
-                <Border Grid.Column="0" Background="#FF3AC02D"  BorderBrush="Transparent" Height='30'  BorderThickness="1,1,1,1" Width="60" CornerRadius="5,5,5,5"  Margin="0,10,10,0" >
-                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Send" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="12" Background="#FF3AC02D" Click="send_clickbtn"  >
+                <Border Grid.Column="0" Background="#FF138607"  BorderBrush="Transparent" Height='30'  BorderThickness="1,1,1,1" Width="60" CornerRadius="5,5,5,5"  Margin="0,10,10,0" >
+                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Send" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="#FF108305" Click="send_clickbtn"  >
                     </Button>
                 </Border>
 
-                <Border Grid.Column="0" Margin="0,10,20,0" Background="#FFEE0A0A"  BorderBrush="Transparent" Height='30'   BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Stop ALL" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="12" Background="{x:Null}"  >
+                <Border Grid.Column="0" Margin="0,10,20,0" Background="#FF9D0909" Width="60"  BorderBrush="Transparent" Height='30'   BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Stop All" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
                     </Button>
                 </Border>
-                
-                
+
+
                 <Button x:Name="btnMin" Content="-" FontSize="20" Width="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMin_Click" />
                 <Button x:Name="btnMax" Content="□" FontSize="20"  Width="40"  BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMax_Click" />
                 <Button  MouseEnter="btn_MouseEnter" FontSize="20"  x:Name="btnClose" Content="X" Width="40" Height="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnClose_Click"  />
@@ -80,7 +80,7 @@
                         </ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="0" Grid.Column="1" Background="#3A3D4C" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,50,10,5">
+                    <Border Grid.Row="0" Grid.Column="1" Background="#3A3D4C" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,0">
 
                         <Grid AllowDrop="True" Drop="Grid_Drop">
 
@@ -92,14 +92,10 @@
                             <Image Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/Windows/Dash/draganddrop.png" Margin="109,10,109,68"></Image>
                             <TextBlock Grid.Row="1"  Text="Drag and Drop" VerticalAlignment="Bottom" Margin="0,0,0,60" HorizontalAlignment="Center" FontSize="12" Foreground="#FF00FFED" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" Opacity="0.8" ></TextBlock>
                             <TextBlock Grid.Row="1"  Text="OR" VerticalAlignment="Bottom" Margin="0,0,0,40" HorizontalAlignment="Center" FontSize="15" Foreground="White" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" ></TextBlock>
-
-                            <Button Grid.Row="1" Padding="10,10,10,10"  Width="Auto" Height="Auto"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Black"  >
-                                <Button.Background>
-                                    <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\btn.png"/>
-                                </Button.Background>
-
-                            </Button>
-
+                            <Border Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="#FF047C78"  BorderBrush="Transparent" Height='30' Width="100"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                                <Button Grid.Row="1" Padding="5,5,5,5"  Width="auto" Height="29"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White"  FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" >
+                                </Button>
+                            </Border>
 
                         </Grid>
 
@@ -167,7 +163,7 @@
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="auto">
-                                  
+
 
 
 
@@ -183,7 +179,7 @@
                 </Grid>
                 <!-- Main colum 1 end -->
                 <!-- Main colum 2 start -->
-                <Border Grid.Column="0" Grid.Row="1" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,10,10" Background="#FF3A3D4C">
+                <Border Grid.Column="0" Grid.Row="1" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,5,10" Background="#FF3A3D4C">
 
                     <Grid>
 
@@ -213,7 +209,7 @@
                     <RowDefinition Height="60*"></RowDefinition>
                     <RowDefinition Height="50*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border Grid.Column="1" Grid.Row="0" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,5,10,5" Background="#FF3A3D4C">
+                <Border Grid.Row="0" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,10,5" Background="#FF3A3D4C">
 
                     <Grid>
 
@@ -238,7 +234,7 @@
                                 <ColumnDefinition Width="70*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label VerticalAlignment="Center" Foreground="White" Grid.Column="0" FontFamily="Bahnschrift"  FontSize="13" Content="Enter the Mail Body" Width="auto" Margin="0,2,0,-2"></Label>
-                            <Label VerticalAlignment="Center" Foreground="White" FontFamily="Bahnschrift"  FontSize="13" Content="Select Input Parameter" Grid.ColumnSpan="3" Margin="146,2,341,-2"/>
+                            <Label VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift"  FontSize="13" Content="Select Input Parameter" Grid.ColumnSpan="3" Margin="146,2,371,0"/>
                             <ComboBox  Margin="5,4,0,0" Grid.Column="2" Name="parametercombox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="auto" BorderBrush="{x:Null}" Foreground="Black" >
 
                                 <ComboBox.Background>
@@ -282,7 +278,7 @@
 
 
                 </Border>
-                <Border Grid.Column="1" Grid.Row="1" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,10" Background="#FF3A3D4C">
+                <Border Grid.Row="1" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="0,1,5,10" Background="#FF3A3D4C">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50*"></ColumnDefinition>
@@ -290,27 +286,29 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="10*"></RowDefinition>
-                                <RowDefinition Height="10*"></RowDefinition>
-                                <RowDefinition Height="50*"></RowDefinition>
+                                <RowDefinition Height="32*"></RowDefinition>
+                                <RowDefinition Height="32*"></RowDefinition>
+                                <RowDefinition Height="52*"></RowDefinition>
+                                <RowDefinition Height="159*"/>
                             </Grid.RowDefinitions>
-                            <Grid Height="40" Grid.Row="0">
+                            <Grid Height="40" Grid.Row="0" Margin="0,1,0,1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50*"></ColumnDefinition>
-                                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                                    <ColumnDefinition Width="12*"></ColumnDefinition>
+                                    <ColumnDefinition Width="123*"/>
+                                    <ColumnDefinition Width="199*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Business Name :" VerticalContentAlignment="Center" Foreground="White" FontSize="18"/>
-                                <TextBox Grid.Column="1" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" />
+                                <Label  Grid.Column="0" Content="Business Name :" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Grid.ColumnSpan="2" Margin="0,0,14,0" FontFamily="Arial Unicode MS"/>
+                                <TextBox Grid.Column="1" Height="auto" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Grid.ColumnSpan="2" Margin="112,5,2,8" />
                             </Grid>
-                            <Grid Height="40" Grid.Row="1">
+                            <Grid Height="40" Grid.Row="1" Margin="0,1,0,1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="33*"></ColumnDefinition>
-                                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                                    <ColumnDefinition Width="139*"></ColumnDefinition>
+                                    <ColumnDefinition Width="203*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Footer Info :" VerticalContentAlignment="Center" Foreground="White" FontSize="18"/>
-                                <TextBox Grid.Column="1" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" />
+                                <Label Grid.Column="0" Content="Footer Info :" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,0,45,0" FontFamily="Arial Unicode MS"/>
+                                <TextBox Height="auto" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Margin="94,5,2,10" Grid.ColumnSpan="2" />
                             </Grid>
-                            <Border Grid.Row="2" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,10" Background="#FF353643">
+                            <Border Grid.Row="2" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,0,2,4" Background="#FF353643" Grid.RowSpan="2">
                                 <Grid x:Name="logobox" >
 
                                     <Grid.RowDefinitions>
@@ -322,13 +320,13 @@
                                         <Button   Padding="1,1,1,1"  Width="auto"  Height="Auto"  Content="Insert" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="{x:Null}" Click="logoinsertclick"  >
                                         </Button>
                                     </Border>
-                                   
+
                                     <Image  Margin="10,10,10,10" x:Name="logoimagebox" Grid.Row="1" Source="/Windows/Dash/preview.png"/>
                                 </Grid>
                             </Border>
 
                         </Grid>
-                      
+
 
                     </Grid>
 

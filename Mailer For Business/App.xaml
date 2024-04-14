@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Mailer_For_Business"
              xmlns:Dash="clr-namespace:Mailer_For_Business.Windows.Dash" x:Class="Mailer_For_Business.App"
-             StartupUri="/Windows/Dash/DashBoard.xaml">
+             StartupUri="/Windows/Dash/Dashboard.xaml">
     
 </Application>
