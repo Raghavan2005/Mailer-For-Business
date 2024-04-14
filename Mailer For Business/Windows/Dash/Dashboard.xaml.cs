@@ -1,24 +1,14 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using ClosedXML.Excel;
+using Microsoft.VisualBasic.FileIO;
+using Microsoft.Win32;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ExcelDataReader;
-using ClosedXML.Excel;
-using Microsoft.VisualBasic.FileIO;
-using DocumentFormat.OpenXml.Spreadsheet;
-using System.Net.NetworkInformation;
 
 
 namespace Mailer_For_Business.Windows.Dash
@@ -29,11 +19,13 @@ namespace Mailer_For_Business.Windows.Dash
     public partial class Dashboard : Window
     {
         string files;
-     //  int totolfileselected = 0;
+
+
+        //  int totolfileselected = 0;
         int Totolrowcount = 1;
         int Totalcolumncount = 1;
         DataSet csvDataSet, xlsxDataSet;
-        String typestate ="csv";
+        String typestate = "csv";
         public Dashboard()
         {
             InitializeComponent();
@@ -43,7 +35,9 @@ namespace Mailer_For_Business.Windows.Dash
                 filetype.IsEnabled = false;
             }
 
-
+            parametercombox.IsEnabled = false;
+            cxmTextBox.IsEnabled = false;
+            logobox.IsEnabled = false;
 
         }
 
@@ -60,15 +54,16 @@ namespace Mailer_For_Business.Windows.Dash
         private void btnMax_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
-            else {
+            else
+            {
                 MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
                 WindowState = WindowState.Maximized;
-                    
-                    };
+
+            };
         }
         //window states
-        
+
 
 
         //
@@ -84,26 +79,19 @@ namespace Mailer_For_Business.Windows.Dash
         }
 
         //
-        private void Imagesettings_MouseDown(object sender, MouseButtonEventArgs e)
-        {
 
-        }
-
-        private void Imagehelp_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
         //
         private void Grid_Drop(object sender, DragEventArgs e)
         {
             CustomMessageBox messageBox = new CustomMessageBox();
             // Handle file drop
-            try {
+            try
+            {
                 string[] filename = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 // Read only the first file
                 string filePath = filename.FirstOrDefault();
-               
+
                 // Check if a file path is available
                 if (!string.IsNullOrEmpty(filePath))
                 {
@@ -113,11 +101,11 @@ namespace Mailer_For_Business.Windows.Dash
 
                     // Check file extension
                     string extension = System.IO.Path.GetExtension(files).ToLower();
-                if (extension == ".csv" || extension == ".xlsx")
-                {
-                    messageBox.Settext("Information", "File was Loaded as >> " + files);
-                   
-                    bool? result = messageBox.ShowDialog();
+                    if (extension == ".csv" || extension == ".xlsx")
+                    {
+                        messageBox.Settext("Information", "File was Loaded as >> " + files);
+
+                        bool? result = messageBox.ShowDialog();
                         // Process each dropped file
                         // MessageBox.Show("Dropped file: " + file);
                         //  totolfileselected++;
@@ -130,6 +118,7 @@ namespace Mailer_For_Business.Windows.Dash
                             selectstateupdate();
                             AutoLoad();
                             textupdateui();
+
                         }
                         else
                         {//false
@@ -141,27 +130,29 @@ namespace Mailer_For_Business.Windows.Dash
                             AutoLoad();
                             textupdateui();
 
+
                         }
                     }
-                else
-                {
-                   
-                    //  MessageBox.Show("Unsupported file format. Please drop only CSV or XLSX files.");
-                    messageBox.Settext("Unsupported file format", "Please drop only CSV or XLSX files. >>" + filename);
-                    messageBox.ShowDialog();
+                    else
+                    {
 
-                }
+                        //  MessageBox.Show("Unsupported file format. Please drop only CSV or XLSX files.");
+                        messageBox.Settext("Unsupported file format", "Please drop only CSV or XLSX files. >>" + filename);
+                        messageBox.ShowDialog();
+
+                    }
                 }
 
-            } catch
+            }
+            catch
             {
                 messageBox.Settext("Error", "sdfsdfs>" + files);
                 messageBox.ShowDialog();
             }
-            
-           
-            
-            
+
+
+
+
         }
 
 
@@ -179,11 +170,11 @@ namespace Mailer_For_Business.Windows.Dash
             // Process selected files
             if (result == true)
             {
-                  files = openFileDialog.FileName;
+                files = openFileDialog.FileName;
                 messageBox.Settext("Information", "File was Loaded as >> " + files);
                 messageBox.ShowDialog();
-              
-                    string extension = System.IO.Path.GetExtension(files).ToLower();
+
+                string extension = System.IO.Path.GetExtension(files).ToLower();
                 if (extension == ".csv")
                 {//true
                  // totolfileselected++;
@@ -193,6 +184,7 @@ namespace Mailer_For_Business.Windows.Dash
                     selectstateupdate();
                     AutoLoad();
                     textupdateui();
+
                 }
                 else
                 {//false
@@ -204,6 +196,7 @@ namespace Mailer_For_Business.Windows.Dash
                     AutoLoad();
                     textupdateui();
 
+
                 }
 
 
@@ -213,28 +206,31 @@ namespace Mailer_For_Business.Windows.Dash
 
         private void resetimport_Click(object sender, RoutedEventArgs e)
         {
-           Totolrowcount = 0;
-          Totalcolumncount = 0;
+            Totolrowcount = 0;
+            Totalcolumncount = 0;
+            parametercombox.IsEnabled = false;
+            cxmTextBox.IsEnabled = false;
+            logobox.IsEnabled = false;
             //statustext.Text = "Please Select File Format : (.csv //.xlsx)";
-            csvDataGrid.ItemsSource =" ";
+            csvDataGrid.ItemsSource = " ";
             textupdateui();
             files = "";
-            filetypetxt.Content ="Select The File";
+            filetypetxt.Content = "Select The File";
         }
 
-      void textupdateui()
+        void textupdateui()
         {
             if (!string.IsNullOrEmpty(files))
             {
                 string filenames = System.IO.Path.GetFileNameWithoutExtension(files).ToLower();
-                filetypetxt.Content = filenames.ToString() + "."+ typestate.ToLower();
+                filetypetxt.Content = filenames.ToString() + "." + typestate.ToLower();
                 rowcount.Content = Totolrowcount.ToString();
                 columncount.Content = Totalcolumncount.ToString();
                 pendingtxt.Content = "0/" + Totolrowcount.ToString();
 
 
             }
-                
+
         }
 
 
@@ -271,8 +267,8 @@ namespace Mailer_For_Business.Windows.Dash
                         rowCount++;
                     }
                     // Read the first line
-                  
-                  
+
+
                 }
             }
 
@@ -303,14 +299,15 @@ namespace Mailer_For_Business.Windows.Dash
             Totolrowcount = rowCount;
             return rowCount;
         }
-   //
+        //
 
-
+        //
         void Updatethestateoftype()
         {
 
-            typestate = filetype.SelectedValue.ToString().ToLower();
-           
+            typestate = (filetype.SelectedIndex == 0) ? "csv" : "xlsx";
+
+
         }
         void selectstateupdate()
         {
@@ -325,7 +322,7 @@ namespace Mailer_For_Business.Windows.Dash
                 header.Header = "XLSX";
             }
         }
-        
+
         //dataset
         private DataSet ReadCsvFile(string filePath)
         {
@@ -358,7 +355,10 @@ namespace Mailer_For_Business.Windows.Dash
                     }
 
                     dataSet.Tables.Add(dataTable);
+
+
                 }
+
             }
             catch (Exception ex)
             {
@@ -373,32 +373,56 @@ namespace Mailer_For_Business.Windows.Dash
             Updatethestateoftype();
         }
 
+        void addparametervalues()
+        {
+            cxmTextBox.IsEnabled = true;
+            logobox.IsEnabled = true;
+            parametercombox.IsEnabled = true;
+            parametercombox.ItemsSource = null;
+
+            if (typestate == "csv")
+            {
+                parametercombox.ItemsSource = GetColumnNames(csvDataSet);
+                parametercombox.SelectedIndex = 0;
+                return;
+            }
+            else
+            {
+                parametercombox.ItemsSource = GetColumnNames(xlsxDataSet);
+                parametercombox.SelectedIndex = 0;
+                return;
+            }
+        }
+
         private void AutoLoad()
         {
 
-            
+
             try
             {
 
-           
-            if (!string.IsNullOrEmpty(files)) { 
-                string extension = System.IO.Path.GetExtension(files).ToLower();
-            if (extension == ".csv")
-            {//true
-             
-             
-                csvDataSet = ReadCsvFile(files);
-                csvDataGrid.ItemsSource = csvDataSet.Tables[0].DefaultView;
-            }
-            else
-            {//false
-             // totolfileselected++;
-             
-                xlsxDataSet = ReadXlsxFile(files);
-                        csvDataGrid.ItemsSource = xlsxDataSet.Tables[0].DefaultView;
 
-            }
-            }
+                if (!string.IsNullOrEmpty(files))
+                {
+                    string extension = System.IO.Path.GetExtension(files).ToLower();
+                    if (extension == ".csv")
+                    {//true
+
+
+                        csvDataSet = ReadCsvFile(files);
+                        csvDataGrid.ItemsSource = csvDataSet.Tables[0].DefaultView;
+                        addparametervalues();
+                    }
+                    else
+                    {//false
+                     // totolfileselected++;
+
+                        xlsxDataSet = ReadXlsxFile(files);
+                        csvDataGrid.ItemsSource = xlsxDataSet.Tables[0].DefaultView;
+                        addparametervalues();
+
+                    }
+                }
             }
             catch (Exception ep)
             {
@@ -445,8 +469,13 @@ namespace Mailer_For_Business.Windows.Dash
                         }
 
                         dataSet.Tables.Add(dataTable);
+
                     }
+
+
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -455,6 +484,310 @@ namespace Mailer_For_Business.Windows.Dash
 
             return dataSet;
         }
+
+        //textbox
+        private void MenuChange(Object sender, RoutedEventArgs ags)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb == null || cxm == null) return;
+
+            switch (rb.Name)
+            {
+                case "rbCustom":
+                    cxmTextBox.ContextMenu = cxm;
+                    break;
+                case "rbDefault":
+                    // Clearing the value of the ContextMenu property
+                    // restores the default TextBox context menu.
+                    cxmTextBox.ClearValue(ContextMenuProperty);
+                    break;
+                case "rbDisabled":
+                    // Setting the ContextMenu propety to
+                    // null disables the context menu.
+                    cxmTextBox.ContextMenu = null;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void ClickPaste(Object sender, RoutedEventArgs args) { cxmTextBox.Paste(); }
+        void ClickCopy(Object sender, RoutedEventArgs args) { cxmTextBox.Copy(); }
+        void ClickCut(Object sender, RoutedEventArgs args) { cxmTextBox.Cut(); }
+        void ClickUndo(Object sender, RoutedEventArgs args) { cxmTextBox.Undo(); }
+        void ClickRedo(Object sender, RoutedEventArgs args) { cxmTextBox.Redo(); }
+
+        void ClickSelectLine(Object sender, RoutedEventArgs args)
+        {
+            int lineIndex = cxmTextBox.GetLineIndexFromCharacterIndex(cxmTextBox.CaretIndex);
+            int lineStartingCharIndex = cxmTextBox.GetCharacterIndexFromLineIndex(lineIndex);
+            int lineLength = cxmTextBox.GetLineLength(lineIndex);
+            cxmTextBox.Select(lineStartingCharIndex, lineLength);
+        }
+
+        void AddNewItem(object sender, RoutedEventArgs e)
+        {
+            // Get the current cursor position
+            int cursorPosition = cxmTextBox.CaretIndex;
+
+            // Get the text to insert
+            string newText = "((%" + parametercombox.SelectedValue.ToString() + "%))";
+
+            // Insert the text at the cursor position
+            cxmTextBox.Text = cxmTextBox.Text.Insert(cursorPosition, newText);
+
+            // Update the cursor position to the end of the inserted text
+            cxmTextBox.CaretIndex = cursorPosition + newText.Length;
+        }
+        public string ReplaceSpaceWithUnderscore(string input)
+        {
+            // Replace space with underscore
+            string output = input.Replace(" ", "_");
+            return output;
+        }
+
+
+        void CxmOpened(Object sender, RoutedEventArgs args)
+        {
+            // Only allow copy/cut if something is selected to copy/cut.
+            if (cxmTextBox.SelectedText == "")
+                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = false;
+            else
+                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = true;
+
+            // Only allow paste if there is text on the clipboard to paste.
+            if (Clipboard.ContainsText())
+                cxmItemPaste.IsEnabled = true;
+            else
+                cxmItemPaste.IsEnabled = false;
+        }
+
+        private void send_clickbtn(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cxmTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            string textBoxValue = cxmTextBox.Text;
+
+
+
+
+
+            // testtxt.Content = ReplacePatterns( textBoxValue);
+        }
+        //replay
+
+        string ReplacePatterns(string input)
+        {
+            // Define the pattern to match ((%name%)) and ((%mail%))
+            string pattern = @"\(\(%(.*?)%\)\)";
+
+            // Use regular expression to find patterns and prompt user for replacement text
+            string replacedText = Regex.Replace(input, pattern, match =>
+            {
+                // Extract the key from the match
+                string key = match.Groups[1].Value;
+                string extension = System.IO.Path.GetExtension(files).ToLower();
+                string replacement;
+                if (extension == ".csv")
+                {
+                    replacement = GetValueFromColumn(csvDataSet, key, 0);
+                }
+                else
+                {
+                    replacement = GetValueFromColumn(xlsxDataSet, key, 0);
+                }
+
+                // Prompt the user for replacement text
+
+                // Return the replacement value
+                return replacement;
+            });
+
+            return replacedText;
+        }
+
+        //
+        // Function to get the value of a column from a DataSet using column name and row index
+        String GetValueFromColumn(DataSet dataSet, string columnName, int rowIndex)
+        {
+            // Check if the DataSet is valid and contains tables
+            if (dataSet != null && dataSet.Tables.Count > 0)
+            {
+                // Get the first DataTable from the DataSet
+                DataTable dataTable = dataSet.Tables[0];
+
+                // Check if the row index is valid
+                if (rowIndex >= 0 && rowIndex < dataTable.Rows.Count)
+                {
+                    // Get the DataRow at the specified index
+                    DataRow targetRow = dataTable.Rows[rowIndex];
+
+                    // Check if the column exists in the DataTable
+                    if (dataTable.Columns.Contains(columnName))
+                    {
+                        // Retrieve the value of the specified column from the DataRow
+                        return targetRow[columnName].ToString();
+                    }
+                    else
+                    {
+                        // Column does not exist in the DataTable
+                        Console.WriteLine($"Column '{columnName}' does not exist in the DataTable.");
+                        return "null";
+                    }
+                }
+                else
+                {
+                    // Invalid row index
+                    Console.WriteLine("Invalid row index.");
+                    return "null";
+                }
+            }
+            else
+            {
+                // Invalid DataSet or no tables in the DataSet
+                Console.WriteLine("Invalid DataSet or no tables found.");
+                return "null";
+            }
+        }
+
+        private void cxmTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if Ctrl + B is pressed
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.B)
+            {
+                // Get the selected text
+                string selectedText = cxmTextBox.SelectedText;
+
+                // Check if any text is selected
+                if (!string.IsNullOrEmpty(selectedText))
+                {
+                    // Apply formatting to the selected text
+                    string formattedText = $"<br>{selectedText}</br>";
+
+                    // Get the start and end indices of the selection
+                    int selectionStart = cxmTextBox.SelectionStart;
+                    int selectionLength = cxmTextBox.SelectionLength;
+
+                    // Replace the selected text with the formatted text
+                    cxmTextBox.Text = cxmTextBox.Text.Remove(selectionStart, selectionLength).Insert(selectionStart, formattedText);
+
+                    // Update the selection indices to reflect the formatted text
+                    cxmTextBox.Select(selectionStart, formattedText.Length);
+
+                    // Mark the event as handled
+                    e.Handled = true;
+                }
+            }
+            // Check if Ctrl + U is pressed
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.U)
+            {
+                // Get the selected text
+                string selectedText = cxmTextBox.SelectedText;
+
+                // Check if any text is selected
+                if (!string.IsNullOrEmpty(selectedText))
+                {
+                    // Apply formatting to the selected text
+                    string formattedText = $"<u>{selectedText}</u>";
+
+                    // Get the start and end indices of the selection
+                    int selectionStart = cxmTextBox.SelectionStart;
+                    int selectionLength = cxmTextBox.SelectionLength;
+
+                    // Replace the selected text with the formatted text
+                    cxmTextBox.Text = cxmTextBox.Text.Remove(selectionStart, selectionLength).Insert(selectionStart, formattedText);
+
+                    // Update the selection indices to reflect the formatted text
+                    cxmTextBox.Select(selectionStart, formattedText.Length);
+
+                    // Mark the event as handled
+                    e.Handled = true;
+                }
+            }
+            // Check if Ctrl + I is pressed
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.I)
+            {
+                // Get the selected text
+                string selectedText = cxmTextBox.SelectedText;
+
+                // Check if any text is selected
+                if (!string.IsNullOrEmpty(selectedText))
+                {
+                    // Apply formatting to the selected text
+                    string formattedText = $"<i>{selectedText}</i>";
+
+                    // Get the start and end indices of the selection
+                    int selectionStart = cxmTextBox.SelectionStart;
+                    int selectionLength = cxmTextBox.SelectionLength;
+
+                    // Replace the selected text with the formatted text
+                    cxmTextBox.Text = cxmTextBox.Text.Remove(selectionStart, selectionLength).Insert(selectionStart, formattedText);
+
+                    // Update the selection indices to reflect the formatted text
+                    cxmTextBox.Select(selectionStart, formattedText.Length);
+
+                    // Mark the event as handled
+                    e.Handled = true;
+                }
+            }
+
+
+        }
+
+        private void logoinsertclick(object sender, RoutedEventArgs e)
+        {
+            // Open the UrlInputWindow to get the URL
+            UrlInputWindow urlInputWindow = new UrlInputWindow();
+            if (urlInputWindow.ShowDialog() == true) // If user clicked OK
+            {
+                string enteredUrl = urlInputWindow.EnteredUrl;
+
+                // Create a BitmapImage object from the URL
+                BitmapImage bitmapImage = new BitmapImage(new Uri(enteredUrl));
+
+                // Set the source of the Image control to the BitmapImage
+                logoimagebox.Source = bitmapImage;
+
+                double imageWidth = logoimagebox.ActualWidth;
+                double imageHeight = logoimagebox.ActualHeight;
+                // testtxt.Content= ((int)imageWidth).ToString()+"X"+((int)imageHeight).ToString();
+            }
+            else
+            {
+                urlInputWindow.Close();
+            }
+        }
+
+
+
+
+
+        //
+
+        List<string> GetColumnNames(DataSet dataSet)
+        {
+            List<string> columnNames = new List<string>();
+
+            if (dataSet != null && dataSet.Tables.Count > 0)
+            {
+                DataTable dataTable = dataSet.Tables[0]; // Assuming you're working with the first DataTable in the DataSet
+                DataColumnCollection columns = dataTable.Columns;
+
+                // Iterate over the columns and add their names to the list
+                foreach (DataColumn column in columns)
+                {
+                    columnNames.Add(column.ColumnName);
+                }
+            }
+
+            return columnNames;
+        }
+
+
 
 
         //

@@ -7,7 +7,7 @@
         mc:Ignorable="d" AllowsTransparency="True"
         Title="CustomMessageBox" Height="150" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Background>
-        <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\massage.png"/>
+        <ImageBrush ImageSource="/Windows/Dash/massage.png"/>
     </Window.Background>
     <Grid  Margin="10">
         <StackPanel>
@@ -17,7 +17,7 @@
         </StackPanel>   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Content="OK" Width="75" VerticalAlignment="Bottom" Margin="5" Height="30" Click="OKButton_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Arial Rounded MT Bold">
                 <Button.Background>
-                    <ImageBrush ImageSource="D:\Project\Mailer For Business\Mailer For Business\Mailer For Business\Windows\Dash\btn.png"/>
+                    <ImageBrush ImageSource="/Windows/Dash/btn.png"/>
                 </Button.Background>
             </Button>
 

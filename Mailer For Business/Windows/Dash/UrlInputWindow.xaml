@@ -1,0 +1,32 @@
+﻿<Window x:Class="Mailer_For_Business.Windows.Dash.UrlInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF353643"
+        ResizeMode="NoResize"
+        Title="UrlInputWindow" Height="350" Width="300">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="10" CaptionHeight="0" ></WindowChrome>
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Label VerticalAlignment="Top"  Margin="10,32,10,0" Content="Paste The Image Url here" Foreground="White" FontFamily="Berlin Sans FB Demi" FontSize="18"/>
+        <TextBox x:Name="urlTextBox" Grid.Row="0" Margin="10,66,10,0" VerticalAlignment="Top"  Background="#FF6E6E72" Foreground="White" FontFamily="Segoe UI Light" TextChanged="urlTextBox_TextChanged" />
+        <Image  Width="200" Height="170" x:Name="prvimagebox" VerticalAlignment="Top" Source="/Windows/Dash/preview.png" Margin="50,110,50,0"/>
+        <Label VerticalAlignment="Top" x:Name="errortxt" Margin="10,87,150,0" Content="" Foreground="#FFE03F3F" FontFamily="Berlin Sans FB Demi" FontSize="9" Grid.RowSpan="2" Height="18"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+
+            <Button x:Name="confirmButton" Margin="5" Width="75" Height="25" Content="OK" Click="confirmButton_Click" Background="#FF0B7C60" Foreground="White" FontFamily="Berlin Sans FB" />
+            <Button x:Name="cancelButton" Margin="5" Width="75" Height="25" Content="Cancel" Click="cancelButton_Click" Background="#FF0B7C60" Foreground="White" FontFamily="Berlin Sans FB" />
+        </StackPanel>
+    </Grid>
+</Window>
