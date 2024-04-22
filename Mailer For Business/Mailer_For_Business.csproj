@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <RootNamespace>Mailer_For_Business</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -24,8 +24,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Windows\Dash\header\**" />
+    <EmbeddedResource Remove="Windows\Dash\header\**" />
+    <None Remove="Windows\Dash\header\**" />
+    <Page Remove="Windows\Dash\header\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Windows\Dash\btn.png" />
+    <None Remove="Windows\Dash\controls\header\bluedark.jpg" />
+    <None Remove="Windows\Dash\controls\header\bluelight.jpg" />
+    <None Remove="Windows\Dash\controls\header\red.jpg" />
     <None Remove="Windows\Dash\draganddrop.png" />
+    <None Remove="Windows\Dash\htmltemp\testmail.html" />
+    <None Remove="Windows\Dash\Images\loading_video.png" />
     <None Remove="Windows\Dash\massage.png" />
     <None Remove="Windows\Dash\preview.png" />
     <None Remove="Windows\Dash\resetbtn.png" />
@@ -53,12 +65,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Windows\Dash\btn.png" />
-    <Resource Include="Windows\Dash\draganddrop.png" />
-    <Resource Include="Windows\Dash\massage.png" />
-    <Resource Include="Windows\Dash\preview.png" />
-    <Resource Include="Windows\Dash\resetbtn.png" />
-    <Resource Include="Windows\Dash\TitleLogo.png" />
+    <Resource Include="Windows\Dash\controls\header\bluedark.jpg" />
+    <Resource Include="Windows\Dash\controls\header\bluelight.jpg" />
+    <Resource Include="Windows\Dash\controls\header\red.jpg" />
+    <Content Include="Windows\Dash\htmltemp\testmail.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Windows\Dash\Images\btn.png" />
+    <Resource Include="Windows\Dash\Images\draganddrop.png" />
+    <Resource Include="Windows\Dash\Images\loading_video.png" />
+    <Resource Include="Windows\Dash\Images\massage.png" />
+    <Resource Include="Windows\Dash\Images\preview.png" />
+    <Resource Include="Windows\Dash\Images\resetbtn.png" />
+    <Resource Include="Windows\Dash\Images\TitleLogo.png" />
     <Resource Include="Windows\Loader\logo.png" />
     <Resource Include="Windows\Loader\Rectangle 12.png" />
     <Resource Include="Windows\logo.png" />

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
         mc:Ignorable="d" AllowsTransparency="True"
+         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="CustomMessageBox" Height="150" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Background>
-        <ImageBrush ImageSource="/Windows/Dash/massage.png"/>
+        <ImageBrush ImageSource="/Windows/Dash/Images/massage.png"/>
     </Window.Background>
     <Grid  Margin="10">
         <StackPanel>
@@ -17,7 +18,7 @@
         </StackPanel>   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Content="OK" Width="75" VerticalAlignment="Bottom" Margin="5" Height="30" Click="OKButton_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Arial Rounded MT Bold">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Windows/Dash/btn.png"/>
+                    <ImageBrush ImageSource="/Windows/Dash/Images/btn.png"/>
                 </Button.Background>
             </Button>
 

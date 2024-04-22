@@ -4,5 +4,5 @@
              xmlns:local="clr-namespace:Mailer_For_Business"
              xmlns:Dash="clr-namespace:Mailer_For_Business.Windows.Dash" x:Class="Mailer_For_Business.App"
              StartupUri="/Windows/Dash/Dashboard.xaml">
-    
+   
 </Application>

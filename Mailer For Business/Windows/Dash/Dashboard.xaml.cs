@@ -1,7 +1,11 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Mailer_For_Business.Windows.Dash.controls;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
+using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -19,7 +23,8 @@ namespace Mailer_For_Business.Windows.Dash
     public partial class Dashboard : Window
     {
         string files;
-
+        Preview preview = new Preview();
+        designselector ds;
 
         //  int totolfileselected = 0;
         int Totolrowcount = 1;
@@ -29,6 +34,7 @@ namespace Mailer_For_Business.Windows.Dash
         public Dashboard()
         {
             InitializeComponent();
+            ds = new designselector();
             filetype.SelectedIndex = 0;
             if ((bool)autofiletype.IsChecked)
             {
@@ -38,7 +44,16 @@ namespace Mailer_For_Business.Windows.Dash
             parametercombox.IsEnabled = false;
             cxmTextBox.IsEnabled = false;
             logobox.IsEnabled = false;
-
+            previewbtn.IsEnabled = false;
+            subjecttxtbox.IsEnabled = false;
+            businesstxtbox.IsEnabled = false;
+            footertxtbox.IsEnabled=false;
+            if (!configfoundandload())
+            {
+                testbtn.IsEnabled = false;
+                sendbtn.IsEnabled = false;
+                stopallbtn.IsEnabled = false;
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -113,22 +128,37 @@ namespace Mailer_For_Business.Windows.Dash
                         {//true
                          // totolfileselected++;
                             typestate = "csv";
-                            CountRows(files);
-                            //statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
-                            selectstateupdate();
-                            AutoLoad();
-                            textupdateui();
+                            if (CountRows(files) != 0)
+                            {
+                                //statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
+                                selectstateupdate();
+                                AutoLoad();
+                                textupdateui();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Data Not Found as >> " + files, "Error");
+                            }
 
                         }
                         else
                         {//false
                          // totolfileselected++;
                             typestate = "xlsx";
-                            CountRows(files);
-                            //  statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
-                            selectstateupdate();
-                            AutoLoad();
-                            textupdateui();
+                            if (CountRows(files) != 0)
+                            {
+                                //  statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
+                                selectstateupdate();
+                                AutoLoad();
+                                textupdateui();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Data Not Found as >> " + files, "Error");
+                            }
+
+
+
 
 
                         }
@@ -179,22 +209,39 @@ namespace Mailer_For_Business.Windows.Dash
                 {//true
                  // totolfileselected++;
                     typestate = "csv";
-                    CountRows(files);
-                    //statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
-                    selectstateupdate();
-                    AutoLoad();
-                    textupdateui();
+                
+                   if (CountRows(files)!=0)
+                    {
+                        //statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
+                        selectstateupdate();
+                        AutoLoad();
+                        textupdateui();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data Not Found as >> " + files, "Error");
+                       
+                    }
+                 
 
                 }
                 else
                 {//false
                  // totolfileselected++;
                     typestate = "xlsx";
-                    CountRows(files);
-                    //  statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
-                    selectstateupdate();
-                    AutoLoad();
-                    textupdateui();
+                    messageBox.Close();
+                    if (CountRows(files) != 0)
+                    {
+                        //  statustext.Text = "Total Rows : " + Totolrowcount.ToString() + " || " + "Total Title Found : " + Totalcolumncount.ToString();
+                        selectstateupdate();
+                        AutoLoad();
+                        textupdateui();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data Not Found as >> " + files, "Error");
+
+                    }
 
 
                 }
@@ -211,6 +258,13 @@ namespace Mailer_For_Business.Windows.Dash
             parametercombox.IsEnabled = false;
             cxmTextBox.IsEnabled = false;
             logobox.IsEnabled = false;
+            previewbtn.IsEnabled = false;
+            subjecttxtbox.IsEnabled = false;
+            businesstxtbox.IsEnabled = false;
+            footertxtbox.IsEnabled = false;
+            testbtn.IsEnabled = false;
+            sendbtn.IsEnabled = false;
+            stopallbtn.IsEnabled = false;
             //statustext.Text = "Please Select File Format : (.csv //.xlsx)";
             csvDataGrid.ItemsSource = " ";
             textupdateui();
@@ -241,7 +295,7 @@ namespace Mailer_For_Business.Windows.Dash
             // Check if the file exists
             if (!File.Exists(filePath))
             {
-                Console.WriteLine("File not found.");
+                MessageBox.Show("File not found.");
                 return 0;
             }
 
@@ -287,13 +341,13 @@ namespace Mailer_For_Business.Windows.Dash
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error reading Excel file: " + ex.Message);
+                    MessageBox.Show("Error reading Excel file: " + ex.Message);
                 }
 
             }
             else
             {
-                Console.WriteLine("Unsupported file format.");
+                MessageBox.Show("Unsupported file format.");
             }
             Totalcolumncount = columnCount;
             Totolrowcount = rowCount;
@@ -377,6 +431,13 @@ namespace Mailer_For_Business.Windows.Dash
         {
             cxmTextBox.IsEnabled = true;
             logobox.IsEnabled = true;
+            previewbtn.IsEnabled = true;
+            subjecttxtbox.IsEnabled = true;
+            businesstxtbox.IsEnabled = true;
+            testbtn.IsEnabled = true;
+            sendbtn.IsEnabled = true;
+            stopallbtn.IsEnabled = true;
+            footertxtbox.IsEnabled = true;
             parametercombox.IsEnabled = true;
             parametercombox.ItemsSource = null;
 
@@ -562,20 +623,16 @@ namespace Mailer_For_Business.Windows.Dash
                 cxmItemPaste.IsEnabled = false;
         }
 
-        private void send_clickbtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void cxmTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+           
             string textBoxValue = cxmTextBox.Text;
 
 
 
 
-
+            preview.calltextpreview(ReplacePatterns(textBoxValue));
             // testtxt.Content = ReplacePatterns( textBoxValue);
         }
         //replay
@@ -762,7 +819,148 @@ namespace Mailer_For_Business.Windows.Dash
             }
         }
 
+        private void btn_preview(object sender, RoutedEventArgs e)
+        {
 
+
+
+
+            if (preview == null || !preview.IsVisible)
+            {
+                preview = new Preview(); // Replace 'PreviewWindow' with the actual class name of your preview window
+            }
+            preview.Topmost = true;
+            preview.Show();
+
+            string textBoxValue = cxmTextBox.Text;
+
+
+
+
+            preview.calltextpreview(ReplacePatterns(textBoxValue));
+        }
+
+
+        private void guidebtn_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://raghavan.gitbook.io/mailer_for_business";
+
+            // Start the default web browser with the specified URL
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        settings settingsWindow;
+        private void setting_onclick(object sender, RoutedEventArgs e)
+        {
+             settingsWindow = new settings();
+
+            settingsWindow.Show();
+        }
+        bool configfoundandload()
+        {
+            string hostname = ConfigurationManager.AppSettings["hostname"];
+            if (hostname != "null")
+            {
+
+                string port = ConfigurationManager.AppSettings["port"];
+                string secure = ConfigurationManager.AppSettings["secure"];
+                string username = ConfigurationManager.AppSettings["username"];
+                string password = ConfigurationManager.AppSettings["password"];
+                string sendername = ConfigurationManager.AppSettings["sendername"];
+                string frommail = ConfigurationManager.AppSettings["frommail"];
+                string maildelay = ConfigurationManager.AppSettings["maildelay"];
+                string mailcolumn = ConfigurationManager.AppSettings["mailcolumn"];
+                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        //menu btns
+        CustomMessageBox messageBox;
+        private void testButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (configfoundandload()) {
+            
+            
+            }
+            else
+            {
+                if (messageBox == null || !messageBox.IsVisible)
+                {
+                    messageBox = new CustomMessageBox();
+                }
+                messageBox.Settext("SMTP Config Not Found", "Please navigate to 'Settings' and add your SMTP server configuration. For detailed instructions, click the 'Guide' button.");
+                messageBox.ShowDialog();
+            }
+        }
+
+        private void stopallbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (configfoundandload())
+            {
+
+
+            }
+            else
+            {
+                if (messageBox == null || !messageBox.IsVisible)
+                {
+                    messageBox = new CustomMessageBox();
+                }
+                messageBox.Settext("SMTP Config Not Found", "Please navigate to 'Settings' and add your SMTP server configuration. For detailed instructions, click the 'Guide' button.");
+                messageBox.ShowDialog();
+            }
+        }
+        string businessname, footername;
+        private void send_clickbtn(object sender, RoutedEventArgs e)
+        {
+            //configfoundandload()
+            if (true)
+            {
+                if (ds.getusetemp())
+                {
+                    if (businessname != null && footername != null)
+                    {
+                        // Use temp
+                        ds.setcurrentslectiondata();
+                    }
+                    else
+                    {
+                        if (messageBox == null || !messageBox.IsVisible)
+                        {
+                            messageBox = new CustomMessageBox();
+                        }
+                        messageBox.Settext("Invalid Business Name", "Please enter a valid business name.");
+                        messageBox.ShowDialog();
+                    }
+                }
+                else
+                {
+                    // Use no temp
+                    if (messageBox == null || !messageBox.IsVisible)
+                    {
+                        messageBox = new CustomMessageBox();
+                    }
+                    messageBox.Settext("No Template", "No template is selected.");
+                    messageBox.ShowDialog();
+                }
+
+
+
+            }
+            else
+            {
+                if (messageBox == null || !messageBox.IsVisible)
+                {
+                    messageBox = new CustomMessageBox();
+                }
+                messageBox.Settext("SMTP Config Not Found", "Please navigate to 'Settings' and add your SMTP server configuration. For detailed instructions, click the 'Guide' button.");
+                messageBox.ShowDialog();
+            }
+        }
 
 
 
@@ -786,9 +984,34 @@ namespace Mailer_For_Business.Windows.Dash
 
             return columnNames;
         }
+       
+        private void businesstxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (businesstxtbox.Text.ToString() !=null && businesstxtbox.Text.ToString() != "Enter your Business Name") {
+            
+            businessname=businesstxtbox.Text.ToString();
+            
+            
+            
+            }
+        }
+
+        private void footertxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (footertxtbox.Text.ToString() != null && footertxtbox.Text.ToString() != "Enter your Footer Info")
+            {
+
+                footername = footertxtbox.Text.ToString();
 
 
 
+            }
+        }
+
+        void satuesupdating(string update)
+        {
+            liveupdatetxt.Text = update;
+        }
 
         //
 

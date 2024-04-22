@@ -1,0 +1,40 @@
+﻿<Window x:Class="Mailer_For_Business.Windows.Dash.Preview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+       Cursor="Arrow"
+     
+        Background="#353643"
+         Icon="/Windows/logo.png"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="Live Preview" Height="350" Width="500" MaxHeight="650" MaxWidth="500">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="10" CaptionHeight="0" ></WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" VerticalAlignment="Center" Content="Live Preview" Foreground="White" FontFamily="Bahnschrift SemiBold SemiCondensed" FontSize="20" />
+        <StackPanel  Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button  Content="-" FontSize="20" Width="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="Min_Click"  />
+            <Button  FontSize="20"  Content="X" Width="40" Height="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="Close_Click"  />
+        </StackPanel>
+
+        <Border Grid.Row="1"  Background="#3A3D4C" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="10,10,10,10">
+            <TextBlock x:Name="previewtxt"  Text="Type on the Text Box"  Padding="3"  TextWrapping="Wrap"  Height="auto" FontFamily="Arial Unicode MS" FontSize="14" Foreground="White">
+            </TextBlock>
+
+
+
+        </Border>
+    </Grid>
+</Window>

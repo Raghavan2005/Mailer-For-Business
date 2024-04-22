@@ -6,19 +6,22 @@
         xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
         mc:Ignorable="d"
         WindowStyle="None"
-        xmlns:r="clr-namespace:Mailer_For_Business.Windows.Dash.controls"
+       xmlns:r="clr-namespace:Mailer_For_Business.Windows.Dash.controls"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         Background="#353643"
        
-        Title="Dashboard" Height="750" Width="1400" Icon="/Windows/logo.png" MinWidth="500" MinHeight="600">
+        Title="Dashboard" Height="750" Width="1400" Icon="/Windows/logo.png" MinWidth="500" MinHeight="600" Cursor="Arrow">
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="10" CaptionHeight="0" ></WindowChrome>
     </WindowChrome.WindowChrome>
 
+
+
+
     <!-- Main Grid Start -->
-    <Grid Cursor="Hand">
+    <Grid Cursor="Arrow">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"  ></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -26,34 +29,191 @@
         <!-- hearder start -->
         <Grid Background="#3A3D4C">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                <Image Margin="5,5,5,5" Source="/Windows/Dash/TitleLogo.png"></Image>
+                <Image Margin="5,5,5,5" Source="/Windows/Dash/Images/TitleLogo.png"></Image>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Background="#3A3D4C" >
                 <Border Grid.Column="0" Margin="0,10,20,0"  Background="#FF08198D"  BorderBrush="Transparent" Height='30' Width="60" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Guide" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
+                    <Button x:Name="guidebtn" Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Guide" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}" Cursor="Help" Click="guidebtn_Click"  >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </Border>
-                <Border Grid.Column="0" Margin="0,10,20,0" Background="#FF047C78"  BorderBrush="Transparent" Height='30' Width="60"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Config" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
+                <Border  Grid.Column="0" Margin="0,10,20,0" Background="#FF047C78"  BorderBrush="Transparent" Height='30' Width="60"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
+                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Settings" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}" Cursor="Hand" Click="setting_onclick"  >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </Border>
                 <Border Grid.Column="0" Background="#FF9D8E07" BorderThickness="1,1,1,1" Height='30' CornerRadius="5,5,5,5" Width="60" Margin="0,10,10,0" >
-                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60" Height="auto"  Content="Test" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" Background="{x:Null}"  />
+                    <Button x:Name="testbtn"  Grid.Row="1" Padding="2,2,2,2"  Width="60" Height="auto"  Content="Test" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" Cursor="Hand" Click="testButton_Click"  >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                 </Border>
                 <Border Grid.Column="0" Background="#FF138607"  BorderBrush="Transparent" Height='30'  BorderThickness="1,1,1,1" Width="60" CornerRadius="5,5,5,5"  Margin="0,10,10,0" >
-                    <Button  Grid.Row="1" Padding="2,2,2,2"  Width="60"  Height="Auto"  Content="Send" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="#FF108305" Click="send_clickbtn"  >
+                    <Button x:Name="sendbtn"  Grid.Row="1"   Padding="2,2,2,2"  Height="Auto"  Content="Send" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}" Click="send_clickbtn" Cursor="Hand" Margin="0,1,-1,1"  >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </Border>
 
                 <Border Grid.Column="0" Margin="0,10,20,0" Background="#FF9D0909" Width="60"  BorderBrush="Transparent" Height='30'   BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                    <Button Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Stop All" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}"  >
+                    <Button x:Name="stopallbtn" Grid.Row="1"  Padding="2,2,2,2"  Width="auto"  Height="Auto"  Content="Stop All" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Rounded MT Bold" FontSize="12" Background="{x:Null}" Cursor="Hand" Click="stopallbtn_Click"  >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </Border>
 
 
-                <Button x:Name="btnMin" Content="-" FontSize="20" Width="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMin_Click" />
-                <Button x:Name="btnMax" Content="□" FontSize="20"  Width="40"  BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMax_Click" />
-                <Button  MouseEnter="btn_MouseEnter" FontSize="20"  x:Name="btnClose" Content="X" Width="40" Height="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnClose_Click"  />
+                <Button x:Name="btnMin" Content="-" FontSize="20" Width="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMin_Click" Cursor="Hand" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnMax" Content="□" FontSize="20"  Width="40"  BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnMax_Click" Cursor="Hand" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button  MouseEnter="btn_MouseEnter" FontSize="20"  x:Name="btnClose" Content="X" Width="40" Height="40" BorderBrush="Transparent" Background="Transparent" Foreground="White" Click="btnClose_Click" Cursor="Hand"  >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </Grid>
         <!-- Header End -->
@@ -84,16 +244,54 @@
 
                         <Grid AllowDrop="True" Drop="Grid_Drop">
 
-                            <Button x:Name="resetimport" Click="resetimport_Click" Width="25" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Right" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Clear All The Import Files" Margin="0,0,0,193"  >
+                            <Button x:Name="resetimport" Click="resetimport_Click" Width="25" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Right" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Clear All The Import Files" Margin="0,0,0,193" Cursor="Hand"  >
                                 <Button.Background>
-                                    <ImageBrush ImageSource="/Windows/Dash/resetbtn.png"/>
+                                    <ImageBrush ImageSource="/Windows/Dash/Images/resetbtn.png"/>
                                 </Button.Background>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="DarkGoldenrod"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                             </Button>
-                            <Image Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/Windows/Dash/draganddrop.png" Margin="109,10,109,68"></Image>
+                            <Image Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/Windows/Dash/Images/draganddrop.png" Margin="109,10,109,68"></Image>
                             <TextBlock Grid.Row="1"  Text="Drag and Drop" VerticalAlignment="Bottom" Margin="0,0,0,60" HorizontalAlignment="Center" FontSize="12" Foreground="#FF00FFED" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" Opacity="0.8" ></TextBlock>
                             <TextBlock Grid.Row="1"  Text="OR" VerticalAlignment="Bottom" Margin="0,0,0,40" HorizontalAlignment="Center" FontSize="15" Foreground="White" FontFamily="Bahnschrift SemiBold SemiCondensed" RenderTransformOrigin="0.5,-0.579" ></TextBlock>
                             <Border Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="#FF047C78"  BorderBrush="Transparent" Height='30' Width="100"  BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                                <Button Grid.Row="1" Padding="5,5,5,5"  Width="auto" Height="29"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White"  FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" >
+                                <Button Grid.Row="1" Padding="5,5,5,5"  Width="auto" Height="29"  Content="Select Files" Click="SelectFiles_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White"  FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" >
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
                                 </Button>
                             </Border>
 
@@ -144,31 +342,48 @@
                                     <Label Content="Total Column Found  :"  HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Condensed" FontSize="16" FontWeight="Bold"/>
                                     <Label Content="0" x:Name="columncount"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="10,20,0,0"  HorizontalAlignment="Left">
-                                    <StackPanel Orientation="Horizontal" ToolTip="Pending">
-                                        <Label Content="Pending Mail : "  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
-                                        <Ellipse Width="5" Height="5" Fill="#FFE0FF00"/>
-                                        <Label x:Name="pendingtxt" Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                <Grid Height="118">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70*"></ColumnDefinition>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" Width="141">
+                                        <StackPanel Orientation="Horizontal" ToolTip="Pending">
+                                            <Label Content="Pending Mail : " Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="auto"/>
+                                            <Ellipse Width="5" Height="5" Fill="#FFE0FF00"/>
+                                            <Label x:Name="pendingtxt" Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="45"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" ToolTip="Success" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <Label Content="Success Mail : " Width="auto"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+                                            <Ellipse Width="5" Height="5" Fill="#FF03FF00"/>
+                                            <Label Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="44" RenderTransformOrigin="0.5,0.5">
+                                                <Label.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform AngleY="-0.499"/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform Y="-0.125"/>
+                                                    </TransformGroup>
+                                                </Label.RenderTransform>
+                                            </Label>
+                                        </StackPanel>
+
+
+
+
+                                        <StackPanel Orientation="Horizontal" ToolTip="Invailed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <Label Content="Invalid Mail    : " Width="auto" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" />
+                                            <Ellipse Width="5" Height="5" Fill="Red"/>
+                                            <Label Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="48"/>
+
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" ToolTip="Success" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                        <Label Content="Success Mail : "  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
-                                        <Ellipse Width="5" Height="5" Fill="#FF03FF00"/>
-                                        <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" ToolTip="Invailed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                        <Label Content="Pending Mail : "  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
-                                        <Ellipse Width="5" Height="5" Fill="Red"/>
-                                        <Label Content="0/0"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
-                                    </StackPanel>
-                                </StackPanel>
+                                    <Label Content="Current Status"  Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFBAB5B5" FontFamily="Bahnschrift Light SemiCondensed" Width="118" Height="22" Background="{x:Null}"/>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="auto">
+                                    <TextBlock Padding="5" Grid.Column="1" Text="Please Click Start To see the Live Status." x:Name="liveupdatetxt" Width="auto" Height="auto"   TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift SemiLight" Margin="0,22,0,0" FontSize="9"/>
 
+                                </Grid>
 
-
-
-
-                                </StackPanel>
                             </StackPanel>
 
                         </Grid>
@@ -189,7 +404,7 @@
                             <TabItem  x:Name="header" Header="CSV" BorderBrush="{x:Null}" Foreground="Black" Background="#FF3A3D4C" Margin="-2,-2,-46,0" FontFamily="Arial Rounded MT Bold" FontSize="14" Cursor="Arrow" >
 
 
-                                <DataGrid Name="csvDataGrid" AutoGenerateColumns="True" Margin="0" BorderBrush="{x:Null}" Background="#FFCEC7C7" FontFamily="Candara Light" />
+                                <DataGrid Name="csvDataGrid" AutoGenerateColumns="True" Margin="0" BorderBrush="{x:Null}" Background="#FFCEC7C7" FontFamily="Candara Light" Cursor="Hand" />
 
                             </TabItem>
 
@@ -209,7 +424,7 @@
                     <RowDefinition Height="60*"></RowDefinition>
                     <RowDefinition Height="50*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,10,5" Background="#FF3A3D4C">
+                <Border Grid.Row="0" Padding="10,10,10,10" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,10,5" Background="#FF3A3D4C" Cursor="Arrow">
 
                     <Grid>
 
@@ -225,17 +440,17 @@
                                 <ColumnDefinition Width="80*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label Foreground="White" Grid.Column="0" FontFamily="Bahnschrift" FontSize="20" Content="Subject :"></Label>
-                            <TextBox MaxLength="500" Width="auto" Grid.Column="1" Background="#FF353643" Padding="3,0,0,0" BorderBrush="#FF595B5E" BorderThickness="2,2,2,2" Foreground="White" SelectionTextBrush="#FF06A7A7" FontFamily="Arial Unicode MS" FontSize="19" Cursor="Arrow" Text=""/>
+                            <TextBox Text="Type Your Subject here" x:Name="subjecttxtbox" VerticalContentAlignment="Center" MaxLength="500" Width="auto" Grid.Column="1" Background="#FF353643" Padding="3,0,0,0" BorderBrush="#FF595B5E" BorderThickness="2,2,2,2" Foreground="White" SelectionTextBrush="#FF06A7A7" FontFamily="Arial Unicode MS" FontSize="14" Cursor="IBeam" />
                         </Grid>
                         <Grid Grid.Column="0" Grid.Row="1" Margin="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30*"></ColumnDefinition>
-                                <ColumnDefinition Width="25*"></ColumnDefinition>
-                                <ColumnDefinition Width="70*"></ColumnDefinition>
+                                <ColumnDefinition Width="75*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label VerticalAlignment="Center" Foreground="White" Grid.Column="0" FontFamily="Bahnschrift"  FontSize="13" Content="Enter the Mail Body" Width="auto" Margin="0,2,0,-2"></Label>
-                            <Label VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift"  FontSize="13" Content="Select Input Parameter" Grid.ColumnSpan="3" Margin="146,2,371,0"/>
-                            <ComboBox  Margin="5,4,0,0" Grid.Column="2" Name="parametercombox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="auto" BorderBrush="{x:Null}" Foreground="Black" >
+
+                            <Label VerticalAlignment="Top" Grid.Column="0"  Foreground="White" FontFamily="Bahnschrift"  FontSize="13" Content="Select Input Parameter" Height="28" Margin="0,2,0,0"/>
+                            <ComboBox  Margin="5,4,0,0" Grid.Column="1" Name="parametercombox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="26" BorderBrush="{x:Null}" Foreground="Black" >
 
                                 <ComboBox.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -243,18 +458,51 @@
                                         <GradientStop Color="#FF00EDFF" Offset="1"/>
                                     </LinearGradientBrush>
                                 </ComboBox.Background>
-
-
                             </ComboBox>
+                            <Border Grid.Column="2" HorizontalAlignment="Right" Margin="0,4,0,0" VerticalAlignment="Center"  Background="#FF545354" Width="auto"  BorderBrush="Transparent" Height='25'  Padding="10,0,10,0" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" Cursor="Hand" >
+                                <Button Padding="0" x:Name="previewbtn"  Margin="0,3,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto"  Height="auto"  Content="Live Preview" Foreground="White" BorderBrush="{x:Null}" FontFamily="Arial Unicode MS" FontSize="12" Background="{x:Null}" Click="btn_preview"  >
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </Button>
+                            </Border>
 
                         </Grid>
 
 
 
-                        <TextBox SpellCheck.IsEnabled="False" Name="cxmTextBox"     Grid.Row="2" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FF3A3D4C" Padding="5" BorderBrush="#FF8B8C90" Foreground="#FFF4EDED" FontFamily="Arial Unicode MS" FontSize="15" SelectionBrush="#FFCB9F16" BorderThickness="2,2,2,2" TextChanged="cxmTextBox_TextChanged" PreviewKeyDown="cxmTextBox_PreviewKeyDown" Margin="0,5,0,0">
+                        <TextBox SpellCheck.IsEnabled="False" Name="cxmTextBox"      Grid.Row="2" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FF3A3D4C" Padding="5" BorderBrush="#FF8B8C90" Foreground="#FFF4EDED" FontFamily="Arial Unicode MS" FontSize="15" SelectionBrush="#FFCB9F16" BorderThickness="2,2,2,2" TextChanged="cxmTextBox_TextChanged" PreviewKeyDown="cxmTextBox_PreviewKeyDown" Margin="0,5,0,0" Cursor="IBeam" Text="Enter the email body. If you need assistance, click the 'Guide' button at the top to access text and video guides for this application. ">
                             <TextBox.ContextMenu>
                                 <ContextMenu  Name="cxm" Opened="CxmOpened">
-                                    <MenuItem Header="Add Parameter" Name="cxmaddnew" Click="AddNewItem" />
+                                    <MenuItem Header="Insert Parameter" Name="cxmaddnew" Click="AddNewItem" />
                                     <Separator/>
                                     <MenuItem  Header="Cut" Name="cxmItemCut" Click="ClickCut" />
                                     <Separator/>
@@ -298,15 +546,16 @@
                                     <ColumnDefinition Width="199*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label  Grid.Column="0" Content="Business Name :" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Grid.ColumnSpan="2" Margin="0,0,14,0" FontFamily="Arial Unicode MS"/>
-                                <TextBox Grid.Column="1" Height="auto" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Grid.ColumnSpan="2" Margin="112,5,2,8" />
+                                <TextBox Text="Enter your Business Name"  x:Name="businesstxtbox" Padding="5,0,0,0" VerticalContentAlignment="Center" Grid.Column="1" Height="auto" Width="auto" Foreground="White" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Grid.ColumnSpan="2" Margin="112,5,2,8" FontFamily="Arial Rounded MT Bold" TextChanged="businesstxtbox_TextChanged" />
                             </Grid>
                             <Grid Height="40" Grid.Row="1" Margin="0,1,0,1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="139*"></ColumnDefinition>
-                                    <ColumnDefinition Width="203*"></ColumnDefinition>
+                                    <ColumnDefinition Width="160*"></ColumnDefinition>
+                                    <ColumnDefinition Width="43*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Footer Info :" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,0,45,0" FontFamily="Arial Unicode MS"/>
-                                <TextBox Height="auto" Width="auto" Foreground="Black" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Margin="94,5,2,10" Grid.ColumnSpan="2" />
+                                <TextBox Text="Enter your Footer Info"  x:Name="footertxtbox" Padding="5,0,0,0"  VerticalContentAlignment="Center" Height="auto" Width="auto" Foreground="White" Background="#FF353643" BorderThickness="2,2,2,2" BorderBrush="#FF78797B" Margin="94,5,1,10" Grid.ColumnSpan="3" FontFamily="Arial Rounded MT Bold" TextChanged="footertxtbox_TextChanged" />
                             </Grid>
                             <Border Grid.Row="2" Padding="5,5,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,0,2,4" Background="#FF353643" Grid.RowSpan="2">
                                 <Grid x:Name="logobox" >
@@ -317,16 +566,35 @@
                                     </Grid.RowDefinitions>
                                     <Label HorizontalAlignment="Left" Content="Select the Logo : "  VerticalContentAlignment="Center" Grid.Row="0" Foreground="White" FontFamily="Bahnschrift Light" FontSize="14"></Label>
                                     <Border Grid.Row="0" Width="100" Background="#FF392F9E" Margin="10,0,0,0"  BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" >
-                                        <Button   Padding="1,1,1,1"  Width="auto"  Height="Auto"  Content="Insert" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="{x:Null}" Click="logoinsertclick"  >
+                                        <Button   Padding="1,1,1,1"  Width="auto"  Height="Auto"  Content="Insert" Foreground="White" BorderBrush="{x:Null}" FontFamily="Cascadia Mono ExtraLight" FontSize="14" Background="{x:Null}" Click="logoinsertclick" Cursor="Hand"  >
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="Green"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="DarkGoldenrod"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                         </Button>
                                     </Border>
 
-                                    <Image  Margin="10,10,10,10" x:Name="logoimagebox" Grid.Row="1" Source="/Windows/Dash/preview.png"/>
+                                    <Image  Margin="10,10,10,10" x:Name="logoimagebox" Grid.Row="1" Source="/Windows/Dash/Images/preview.png"/>
                                 </Grid>
                             </Border>
 
                         </Grid>
-
+                        <r:designselector Grid.Column="1"/>
 
                     </Grid>
 

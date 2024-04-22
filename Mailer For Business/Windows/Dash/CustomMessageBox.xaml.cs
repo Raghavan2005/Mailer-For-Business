@@ -36,6 +36,9 @@ namespace Mailer_For_Business.Windows.Dash
             titletext.Text = title;
             massagetext.Text = msg;
         }
-       
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
