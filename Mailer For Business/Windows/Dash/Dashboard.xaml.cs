@@ -1,6 +1,6 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
-using Mailer_For_Business.Windows.Dash.controls;
+
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
 using System.Configuration;
@@ -24,17 +24,18 @@ namespace Mailer_For_Business.Windows.Dash
     {
         string files;
         Preview preview = new Preview();
-        designselector ds;
+     
 
         //  int totolfileselected = 0;
         int Totolrowcount = 1;
         int Totalcolumncount = 1;
         DataSet csvDataSet, xlsxDataSet;
         String typestate = "csv";
+   
         public Dashboard()
         {
             InitializeComponent();
-            ds = new designselector();
+           
             filetype.SelectedIndex = 0;
             if ((bool)autofiletype.IsChecked)
             {
@@ -47,6 +48,9 @@ namespace Mailer_For_Business.Windows.Dash
             previewbtn.IsEnabled = false;
             subjecttxtbox.IsEnabled = false;
             businesstxtbox.IsEnabled = false;
+            tepsel.ItemsSource = headerItems;
+            tepsel.SelectedIndex = 0;
+            imageselectorbox.IsEnabled = false;
             footertxtbox.IsEnabled=false;
             if (!configfoundandload())
             {
@@ -261,6 +265,7 @@ namespace Mailer_For_Business.Windows.Dash
             previewbtn.IsEnabled = false;
             subjecttxtbox.IsEnabled = false;
             businesstxtbox.IsEnabled = false;
+            imageselectorbox.IsEnabled = false;
             footertxtbox.IsEnabled = false;
             testbtn.IsEnabled = false;
             sendbtn.IsEnabled = false;
@@ -433,6 +438,7 @@ namespace Mailer_For_Business.Windows.Dash
             logobox.IsEnabled = true;
             previewbtn.IsEnabled = true;
             subjecttxtbox.IsEnabled = true;
+            imageselectorbox.IsEnabled = true;
             businesstxtbox.IsEnabled = true;
             testbtn.IsEnabled = true;
             sendbtn.IsEnabled = true;
@@ -848,13 +854,15 @@ namespace Mailer_For_Business.Windows.Dash
             // Start the default web browser with the specified URL
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
-        settings settingsWindow;
+        settings settingsWindow = new settings();
         private void setting_onclick(object sender, RoutedEventArgs e)
         {
-             settingsWindow = new settings();
+             
 
             settingsWindow.Show();
         }
+        int maildelay=3;
+        int mailcolumn=0;
         bool configfoundandload()
         {
             string hostname = ConfigurationManager.AppSettings["hostname"];
@@ -867,9 +875,9 @@ namespace Mailer_For_Business.Windows.Dash
                 string password = ConfigurationManager.AppSettings["password"];
                 string sendername = ConfigurationManager.AppSettings["sendername"];
                 string frommail = ConfigurationManager.AppSettings["frommail"];
-                string maildelay = ConfigurationManager.AppSettings["maildelay"];
-                string mailcolumn = ConfigurationManager.AppSettings["mailcolumn"];
-                
+                 maildelay = Convert.ToInt32(ConfigurationManager.AppSettings["maildelay"]);
+                 mailcolumn = Convert.ToInt32(ConfigurationManager.AppSettings["mailcolumn"]);
+         
                 return true;
             }
             else
@@ -917,15 +925,30 @@ namespace Mailer_For_Business.Windows.Dash
         string businessname, footername;
         private void send_clickbtn(object sender, RoutedEventArgs e)
         {
+            tempsel = usetemp.IsChecked ?? false;
             //configfoundandload()
             if (true)
             {
-                if (ds.getusetemp())
+               
+                if (tempsel)
                 {
-                    if (businessname != null && footername != null)
+                    if (businessname != null && footername != null && subject!= null)
                     {
+                        SendMessageBox sendmessagebox = new SendMessageBox();
                         // Use temp
-                        ds.setcurrentslectiondata();
+                        if (sendmessagebox == null || !sendmessagebox.IsVisible)
+                        {
+                            sendmessagebox = new SendMessageBox();
+                        }
+                          sendmessagebox.Settext("Confirmation Window", "Total Rows = " + Totolrowcount.ToString() + "\n" + "Total Columns = " + Totalcolumncount.ToString() + "\n" + "Subject = " + subject + "\n" + "Mail Delay = " + maildelay.ToString() + "\n" + "Task Completed On = " + GetTheTimestamp(Totolrowcount, maildelay));
+                       
+                        //    sendmessagebox.Settext("SDSd",GetTheTimestamp(5, 5));
+                            sendmessagebox.ShowDialog();
+
+                        
+                     
+
+
                     }
                     else
                     {
@@ -933,7 +956,7 @@ namespace Mailer_For_Business.Windows.Dash
                         {
                             messageBox = new CustomMessageBox();
                         }
-                        messageBox.Settext("Invalid Business Name", "Please enter a valid business name.");
+                        messageBox.Settext("Invalid Business Name or Footer Name or Mail Subject", "Please enter a valid business name or footer name or Mail Subject.");
                         messageBox.ShowDialog();
                     }
                 }
@@ -944,7 +967,7 @@ namespace Mailer_For_Business.Windows.Dash
                     {
                         messageBox = new CustomMessageBox();
                     }
-                    messageBox.Settext("No Template", "No template is selected.");
+                    messageBox.Settext("Information", "The mail body now supports plain HTML <html><body> tags as they are built-in. Inline CSS is also supported using (' ').");
                     messageBox.ShowDialog();
                 }
 
@@ -961,6 +984,57 @@ namespace Mailer_For_Business.Windows.Dash
                 messageBox.ShowDialog();
             }
         }
+
+        //
+
+        void disableallwhensend()
+        {
+            parametercombox.IsEnabled = false;
+            cxmTextBox.IsEnabled = false;
+            logobox.IsEnabled = false;
+            previewbtn.IsEnabled = false;
+            subjecttxtbox.IsEnabled = false;
+            businesstxtbox.IsEnabled = false;
+            imageselectorbox.IsEnabled = false;
+            footertxtbox.IsEnabled = false;
+                testbtn.IsEnabled = false;
+                sendbtn.IsEnabled = false;
+                stopallbtn.IsEnabled = true;
+            
+        }
+        void enableallwhensend()
+        {
+            parametercombox.IsEnabled = true;
+            cxmTextBox.IsEnabled = true;
+            logobox.IsEnabled = true;
+            previewbtn.IsEnabled = true;
+            subjecttxtbox.IsEnabled = true;
+            businesstxtbox.IsEnabled = true;
+            imageselectorbox.IsEnabled = true;
+            footertxtbox.IsEnabled = true;
+            testbtn.IsEnabled = true;
+            sendbtn.IsEnabled = true;
+            stopallbtn.IsEnabled = false;
+
+        }
+
+
+
+        //
+        string GetTheTimestamp(int totalRows, int delayInSeconds)
+        {
+            DateTime startTime = DateTime.Now;
+
+            // Calculate the total processing time in seconds
+            int totalProcessingTimeSeconds = totalRows * delayInSeconds;
+
+            // Calculate the end time by adding the total processing time to the start time
+            DateTime endTime = startTime.AddSeconds(totalProcessingTimeSeconds);
+
+            // Return the end time as a formatted string
+            return endTime.ToString("HH:mm:ss");
+        }
+
 
 
 
@@ -987,36 +1061,136 @@ namespace Mailer_For_Business.Windows.Dash
        
         private void businesstxtbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (businesstxtbox.Text.ToString() !=null && businesstxtbox.Text.ToString() != "Enter your Business Name") {
-            
-            businessname=businesstxtbox.Text.ToString();
-            
-            
-            
+            string businessText = businesstxtbox.Text.ToString().Trim();
+            if (!string.IsNullOrEmpty(businessText) && businessText != "Enter your Business Name")
+            {
+                businessname = businessText;
             }
+
         }
 
         private void footertxtbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (footertxtbox.Text.ToString() != null && footertxtbox.Text.ToString() != "Enter your Footer Info")
+            string footerText = footertxtbox.Text.ToString().Trim();
+            if (!string.IsNullOrEmpty(footerText) && footerText != "Enter your Footer Info")
             {
-
-                footername = footertxtbox.Text.ToString();
-
-
-
+                footername = footerText;
             }
+
         }
 
         void satuesupdating(string update)
         {
             liveupdatetxt.Text = update;
         }
-
         //
+        //
+        //
+        //
+        //user controls
+
+
+         bool tempsel;
+        List<string> headerItems = new List<string>
+               {
+    "Blue Header (Light Mode)",
+    "Blue Header (Dark Mode)",
+    "Red Header (Light Mode)"
+                   };
+
+    
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            tempsel = usetemp.IsChecked ?? false; // Update tempsel based on the checkbox state
+            if (tempsel == true)
+            {
+                tepsel.IsEnabled = true;
+            }
+            else
+            {
+                tepsel.IsEnabled = false;
+            }
+        }
+
+
+        private void tepsel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectimage();
+        }
+
+        string subject;
+        private void subjecttxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tempsubject = subjecttxtbox.Text.ToString();
+            if (tempsubject != null && tempsubject != "Type Your Subject here")
+            {
+                 subject= tempsubject;
+
+            }
+        }
+
+        public string setcurrentslectiondata()
+        {
+            if (tempsel == true)
+            {
+
+                return tepsel.SelectedValue.ToString();
+
+            }
+            else
+
+
+
+            {
+
+                return "none";
+
+            }
+
+
+        }
+       
+
+        void selectimage()
+        {
+
+            if ("Blue Header (Light Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\bluelight.jpg", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else if ("Blue Header (Dark Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\bluedark.jpg", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else if ("Red Header (Light Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\red.jpg", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\preview.png", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+
+        }
+
 
     }
+
+
+
+
+
+
+
+    //
+
 }
+
 /*
      // Read data from CSV file and save to DataSet
             DataSet csvDataSet = ReadCsvFile(csvFilePath);

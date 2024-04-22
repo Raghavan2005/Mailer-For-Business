@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Mailer_For_Business.Windows.Dash"
         mc:Ignorable="d"
         WindowStyle="None"
-       xmlns:r="clr-namespace:Mailer_For_Business.Windows.Dash.controls"
+    
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         Background="#353643"
@@ -440,7 +440,7 @@
                                 <ColumnDefinition Width="80*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label Foreground="White" Grid.Column="0" FontFamily="Bahnschrift" FontSize="20" Content="Subject :"></Label>
-                            <TextBox Text="Type Your Subject here" x:Name="subjecttxtbox" VerticalContentAlignment="Center" MaxLength="500" Width="auto" Grid.Column="1" Background="#FF353643" Padding="3,0,0,0" BorderBrush="#FF595B5E" BorderThickness="2,2,2,2" Foreground="White" SelectionTextBrush="#FF06A7A7" FontFamily="Arial Unicode MS" FontSize="14" Cursor="IBeam" />
+                            <TextBox Text="Type Your Subject here" x:Name="subjecttxtbox" VerticalContentAlignment="Center" MaxLength="500" Width="auto" Grid.Column="1" Background="#FF353643" Padding="3,0,0,0" BorderBrush="#FF595B5E" BorderThickness="2,2,2,2" Foreground="White" SelectionTextBrush="#FF06A7A7" FontFamily="Arial Unicode MS" FontSize="14" Cursor="IBeam" TextChanged="subjecttxtbox_TextChanged" />
                         </Grid>
                         <Grid Grid.Column="0" Grid.Row="1" Margin="0">
                             <Grid.ColumnDefinitions>
@@ -594,8 +594,27 @@
                             </Border>
 
                         </Grid>
-                        <r:designselector Grid.Column="1"/>
-
+                     
+                        <Grid Grid.Column="1" x:Name="imageselectorbox" >
+                            <Border Grid.Column="1" Padding="5,15,5,5" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="2,5,2,5" Background="#FF353643" Grid.RowSpan="2">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="10*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                                            <ColumnDefinition Width="60*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,0,2,0" Background="#FF353643" BorderBrush="{x:Null}" x:Name="tepsel" Foreground="#FF413F3F" FontFamily="Arial Unicode MS" SelectionChanged="tepsel_SelectionChanged" />
+                                        <CheckBox IsChecked="True"  VerticalContentAlignment="Center" VerticalAlignment="Center" Content="Use Template" Foreground="White" FontFamily="Arial Rounded MT Bold" HorizontalAlignment="Left" Width="154" Height="38" Click="CheckBox_Click" x:Name="usetemp" FontSize="14"/>
+                                    </Grid>
+                                    <Image Grid.Row="1" Margin="15" x:Name="selectedimage"  Source="https://images.pexels.com/photos/1391498/pexels-photo-1391498.jpeg"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                       
                     </Grid>
 
 

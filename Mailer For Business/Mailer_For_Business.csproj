@@ -24,17 +24,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Windows\Dash\header\**" />
-    <EmbeddedResource Remove="Windows\Dash\header\**" />
-    <None Remove="Windows\Dash\header\**" />
-    <Page Remove="Windows\Dash\header\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Windows\Dash\btn.png" />
-    <None Remove="Windows\Dash\controls\header\bluedark.jpg" />
-    <None Remove="Windows\Dash\controls\header\bluelight.jpg" />
-    <None Remove="Windows\Dash\controls\header\red.jpg" />
+    <None Remove="Windows\Dash\header\bluedark.jpg" />
+    <None Remove="Windows\Dash\header\bluelight.jpg" />
+    <None Remove="Windows\Dash\header\red.jpg" />
     <None Remove="Windows\Dash\draganddrop.png" />
     <None Remove="Windows\Dash\htmltemp\testmail.html" />
     <None Remove="Windows\Dash\Images\loading_video.png" />
@@ -65,9 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Windows\Dash\controls\header\bluedark.jpg" />
-    <Resource Include="Windows\Dash\controls\header\bluelight.jpg" />
-    <Resource Include="Windows\Dash\controls\header\red.jpg" />
+    <Resource Include="Windows\Dash\header\bluedark.jpg" />
+    <Resource Include="Windows\Dash\header\bluelight.jpg" />
+    <Resource Include="Windows\Dash\header\red.jpg" />
     <Content Include="Windows\Dash\htmltemp\testmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
