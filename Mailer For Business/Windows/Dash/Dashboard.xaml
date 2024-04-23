@@ -356,7 +356,7 @@
                                         <StackPanel Orientation="Horizontal" ToolTip="Success" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                             <Label Content="Success Mail : " Width="auto"  HorizontalAlignment="Center" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
                                             <Ellipse Width="5" Height="5" Fill="#FF03FF00"/>
-                                            <Label Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="44" RenderTransformOrigin="0.5,0.5">
+                                            <Label x:Name="successtxt" Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="44" RenderTransformOrigin="0.5,0.5">
                                                 <Label.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform/>
@@ -374,7 +374,7 @@
                                         <StackPanel Orientation="Horizontal" ToolTip="Invailed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                             <Label Content="Invalid Mail    : " Width="auto" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" />
                                             <Ellipse Width="5" Height="5" Fill="Red"/>
-                                            <Label Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="48"/>
+                                            <Label x:Name="invaildtxt" Content="0/0" Margin="1,0,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14" Width="48"/>
 
                                         </StackPanel>
                                     </StackPanel>

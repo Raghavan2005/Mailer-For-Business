@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 using Microsoft.VisualBasic.FileIO;
@@ -285,13 +286,25 @@ namespace Mailer_For_Business.Windows.Dash
                 filetypetxt.Content = filenames.ToString() + "." + typestate.ToLower();
                 rowcount.Content = Totolrowcount.ToString();
                 columncount.Content = Totalcolumncount.ToString();
-                pendingtxt.Content = "0/" + Totolrowcount.ToString();
+                pendingtxtupadte(0,Totolrowcount);
 
 
             }
 
         }
+        void pendingtxtupadte(int fr, int sc)
+        {
+            pendingtxt.Content = fr.ToString() + "/" + sc.ToString();
+        }
+        void successtxtupadte(int fr, int sc)
+        {
+            successtxt.Content = fr.ToString() + "/" + sc.ToString();
+        }
 
+        void invaildtxtupadte(int fr, int sc)
+        {
+            invaildtxt.Content = fr.ToString() + "/" + sc.ToString();
+        }
 
         int CountRows(string filePath)
         {
@@ -629,21 +642,21 @@ namespace Mailer_For_Business.Windows.Dash
                 cxmItemPaste.IsEnabled = false;
         }
 
-        
+        string currentbody;
         private void cxmTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
            
             string textBoxValue = cxmTextBox.Text;
+            currentbody = textBoxValue;
 
 
 
-
-            preview.calltextpreview(ReplacePatterns(textBoxValue));
+            preview.calltextpreview(ReplacePatterns(textBoxValue,0));
             // testtxt.Content = ReplacePatterns( textBoxValue);
         }
         //replay
 
-        string ReplacePatterns(string input)
+        string ReplacePatterns(string input,int rowindex)
         {
             // Define the pattern to match ((%name%)) and ((%mail%))
             string pattern = @"\(\(%(.*?)%\)\)";
@@ -657,11 +670,11 @@ namespace Mailer_For_Business.Windows.Dash
                 string replacement;
                 if (extension == ".csv")
                 {
-                    replacement = GetValueFromColumn(csvDataSet, key, 0);
+                    replacement = GetValueFromColumn(csvDataSet, key, rowindex);
                 }
                 else
                 {
-                    replacement = GetValueFromColumn(xlsxDataSet, key, 0);
+                    replacement = GetValueFromColumn(xlsxDataSet, key, rowindex);
                 }
 
                 // Prompt the user for replacement text
@@ -800,7 +813,7 @@ namespace Mailer_For_Business.Windows.Dash
 
 
         }
-
+        string logoimage;
         private void logoinsertclick(object sender, RoutedEventArgs e)
         {
             // Open the UrlInputWindow to get the URL
@@ -808,7 +821,7 @@ namespace Mailer_For_Business.Windows.Dash
             if (urlInputWindow.ShowDialog() == true) // If user clicked OK
             {
                 string enteredUrl = urlInputWindow.EnteredUrl;
-
+                logoimage = enteredUrl;
                 // Create a BitmapImage object from the URL
                 BitmapImage bitmapImage = new BitmapImage(new Uri(enteredUrl));
 
@@ -843,7 +856,7 @@ namespace Mailer_For_Business.Windows.Dash
 
 
 
-            preview.calltextpreview(ReplacePatterns(textBoxValue));
+            preview.calltextpreview(ReplacePatterns(textBoxValue,0));
         }
 
 
@@ -857,11 +870,14 @@ namespace Mailer_For_Business.Windows.Dash
         settings settingsWindow = new settings();
         private void setting_onclick(object sender, RoutedEventArgs e)
         {
-             
+            if (settingsWindow == null || !settingsWindow.IsVisible)
+            {
+                settingsWindow = new settings();
+            }
 
             settingsWindow.Show();
         }
-        int maildelay=3;
+        int maildelay=5;
         int mailcolumn=0;
         bool configfoundandload()
         {
@@ -922,31 +938,140 @@ namespace Mailer_For_Business.Windows.Dash
                 messageBox.ShowDialog();
             }
         }
+        public string GetDataAsStringFromDataSet(int columnIndex, int rowIndex)
+        {
+            string extension = System.IO.Path.GetExtension(files).ToLower();
+
+            if (extension == ".csv")
+            {
+                return GetDataAsStringFromCsvDataSet(columnIndex, rowIndex);
+            }
+            else if (extension == ".xlsx")
+            {
+                return GetDataAsStringFromXlsxDataSet(columnIndex, rowIndex);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file extension.");
+            }
+        }
+
+        private string GetDataAsStringFromCsvDataSet(int columnIndex, int rowIndex)
+        {
+            // Check if the dataset is not null and contains tables
+            if (csvDataSet != null && csvDataSet.Tables.Count > 0)
+            {
+                // Get the first table from the dataset
+                DataTable dataTable = csvDataSet.Tables[0];
+
+                // Check if the column index is valid
+                if (columnIndex >= 0 && columnIndex < dataTable.Columns.Count)
+                {
+                    // Check if the row index is valid
+                    if (rowIndex >= 0 && rowIndex < dataTable.Rows.Count)
+                    {
+                        // Get the value from the specified row and column and convert it to string
+                        return Convert.ToString(dataTable.Rows[rowIndex][columnIndex]);
+                    }
+                    else
+                    {
+                        // Handle invalid row index
+                        throw new ArgumentException("Invalid row index.");
+                    }
+                }
+                else
+                {
+                    // Handle invalid column index
+                    throw new ArgumentException("Column index out of range.");
+                }
+            }
+            else
+            {
+                // Handle null dataset or empty dataset
+                throw new ArgumentException("Invalid dataset.");
+            }
+        }
+
+        private string GetDataAsStringFromXlsxDataSet(int columnIndex, int rowIndex)
+        {
+            // Check if the dataset is not null and contains tables
+            if (xlsxDataSet != null && xlsxDataSet.Tables.Count > 0)
+            {
+                // Get the first table from the dataset
+                DataTable dataTable = xlsxDataSet.Tables[0];
+
+                // Check if the column index is valid
+                if (columnIndex >= 0 && columnIndex < dataTable.Columns.Count)
+                {
+                    // Check if the row index is valid
+                    if (rowIndex >= 0 && rowIndex < dataTable.Rows.Count)
+                    {
+                        // Get the value from the specified row and column and convert it to string
+                        return Convert.ToString(dataTable.Rows[rowIndex][columnIndex]);
+                    }
+                    else
+                    {
+                        // Handle invalid row index
+                        throw new ArgumentException("Invalid row index.");
+                    }
+                }
+                else
+                {
+                    // Handle invalid column index
+                    throw new ArgumentException("Column index out of range.");
+                }
+            }
+            else
+            {
+                // Handle null dataset or empty dataset
+                throw new ArgumentException("Invalid dataset.");
+            }
+        }
+
+        List<string> pendinglist = new List<string>();
+        List<string> successlist = new List<string>();
+        List<string> invaildlist = new List<string>();
         string businessname, footername;
-        private void send_clickbtn(object sender, RoutedEventArgs e)
+        mailsender ms = new mailsender();
+        private async void send_clickbtn(object sender, RoutedEventArgs e)
         {
             tempsel = usetemp.IsChecked ?? false;
             //configfoundandload()
-            if (true)
+            if (configfoundandload())
             {
-               
+              
                 if (tempsel)
                 {
-                    if (businessname != null && footername != null && subject!= null)
+                    if (businessname != null && footername != null && subject!= null && logoimage!=null)
                     {
-                        SendMessageBox sendmessagebox = new SendMessageBox();
-                        // Use temp
-                        if (sendmessagebox == null || !sendmessagebox.IsVisible)
+                        if(GetDataAsStringFromDataSet(mailcolumn, 0).Contains("@"))
                         {
-                            sendmessagebox = new SendMessageBox();
+                            CountRows(files);
+                            textupdateui();
+                            bool nu = await SendEmailsAsync(setcurrentslectiondata());
+                            if (nu)
+                            {
+                                if (messageBox == null || !messageBox.IsVisible)
+                                {
+                                    messageBox = new CustomMessageBox();
+                                }
+                                messageBox.Settext("Mail Sended Successfully", "To See the Log Showed on Grid");
+                                messageBox.ShowDialog();
+                                enableallwhensend();
+                            }
                         }
-                          sendmessagebox.Settext("Confirmation Window", "Total Rows = " + Totolrowcount.ToString() + "\n" + "Total Columns = " + Totalcolumncount.ToString() + "\n" + "Subject = " + subject + "\n" + "Mail Delay = " + maildelay.ToString() + "\n" + "Task Completed On = " + GetTheTimestamp(Totolrowcount, maildelay));
+                        else
+                        {
+                            if (messageBox == null || !messageBox.IsVisible)
+                            {
+                                messageBox = new CustomMessageBox();
+                            }
+                            messageBox.Settext("Invaild mail Column Selected", "Please Change the mail Column on 'Settings'.");
+                            messageBox.ShowDialog();
+                        }
                        
-                        //    sendmessagebox.Settext("SDSd",GetTheTimestamp(5, 5));
-                            sendmessagebox.ShowDialog();
-
                         
-                     
+
 
 
                     }
@@ -956,7 +1081,7 @@ namespace Mailer_For_Business.Windows.Dash
                         {
                             messageBox = new CustomMessageBox();
                         }
-                        messageBox.Settext("Invalid Business Name or Footer Name or Mail Subject", "Please enter a valid business name or footer name or Mail Subject.");
+                        messageBox.Settext("Invalid Business Name or Footer Name or Mail Subject or Logo", "Please enter a valid business name or footer name or Mail Subject or Logo.");
                         messageBox.ShowDialog();
                     }
                 }
@@ -984,6 +1109,66 @@ namespace Mailer_For_Business.Windows.Dash
                 messageBox.ShowDialog();
             }
         }
+        //mail processing
+
+        private async Task<bool> SendEmailsAsync(string them)
+        {
+            SendMessageBox sendmessagebox = new SendMessageBox();
+            disableallwhensend();
+            sendmessagebox.Settext("Confirmation Window", $"Total Rows = {Totolrowcount}\nTotal Columns = {Totalcolumncount}\nSubject = {subject}\nMail Delay = {maildelay}\nTask Completed On = {GetTheTimestamp(Totolrowcount, maildelay)}");
+            int row = Totolrowcount;
+            int updaterow = Totolrowcount;
+            int invaild = 0;
+            int success = 0;
+
+            successtxtupadte(0, Totolrowcount);
+            invaildtxtupadte(0, Totolrowcount);
+            bool? result = sendmessagebox.ShowDialog();
+            if (result == true)
+            {
+                satuesupdating("Stating To send Mail..");
+                // When OK button clicked
+                for (int i = 0; i < row; i++)
+                {
+                    string value = ReplacePatterns(currentbody, i);
+                    pendingtxtupadte(Totolrowcount, Totolrowcount);
+                    satuesupdating("Sending Mail At Row of "+row.ToString());
+                    bool resultProcessVar =  ms.sendthemail(subject,value, logoimage, "Red Header (Dark Mode)", GetDataAsStringFromDataSet(mailcolumn,i),businessname,footername);
+
+
+
+                    if (resultProcessVar == true)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            pendingtxtupadte(updaterow-=1, Totolrowcount);
+                            successtxtupadte(success += 1, Totolrowcount);
+                        });
+                    }
+                    else
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            pendingtxtupadte(updaterow += 1, Totolrowcount);
+                            invaildtxtupadte(invaild += 1, Totolrowcount);
+                        });
+                    }
+
+                    await Task.Delay(TimeSpan.FromSeconds(maildelay));
+                 
+                }
+                return true; // All emails sent successfully
+            }
+            else
+            {
+                // When Cancel button clicked
+                enableallwhensend();
+                satuesupdating("Canceling The Mail Send Process..");
+                return false; // Email sending process canceled
+            }
+        }
+
+
 
         //
 
@@ -1095,7 +1280,10 @@ namespace Mailer_For_Business.Windows.Dash
                {
     "Blue Header (Light Mode)",
     "Blue Header (Dark Mode)",
-    "Red Header (Light Mode)"
+    "Red Header (Light Mode)",
+    "Red Header (Dark Mode)",
+    "Green Header (Light Mode)",
+    "Green Header (Dark Mode)"
                    };
 
     
@@ -1157,17 +1345,32 @@ namespace Mailer_For_Business.Windows.Dash
 
             if ("Blue Header (Light Mode)" == tepsel.SelectedValue.ToString())
             {
-                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\bluelight.jpg", UriKind.RelativeOrAbsolute));
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\blueheaderlightmode.png", UriKind.RelativeOrAbsolute));
                 selectedimage.Source = bitmapImage;
             }
             else if ("Blue Header (Dark Mode)" == tepsel.SelectedValue.ToString())
             {
-                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\bluedark.jpg", UriKind.RelativeOrAbsolute));
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\blueheaderdarkmode.png", UriKind.RelativeOrAbsolute));
                 selectedimage.Source = bitmapImage;
             }
             else if ("Red Header (Light Mode)" == tepsel.SelectedValue.ToString())
             {
-                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\red.jpg", UriKind.RelativeOrAbsolute));
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\redheaderlightmode.png", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else if ("Red Header (Dark Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\redheaderdarkmode.png", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else if ("Green Header (Light Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\greenheaderlightmode.png", UriKind.RelativeOrAbsolute));
+                selectedimage.Source = bitmapImage;
+            }
+            else if ("Green Header (Dark Mode)" == tepsel.SelectedValue.ToString())
+            {
+                BitmapImage bitmapImage = new BitmapImage(new Uri(@"\Windows\Dash\header\greenheaderdarkmode.png", UriKind.RelativeOrAbsolute));
                 selectedimage.Source = bitmapImage;
             }
             else
@@ -1191,23 +1394,4 @@ namespace Mailer_For_Business.Windows.Dash
 
 }
 
-/*
-     // Read data from CSV file and save to DataSet
-            DataSet csvDataSet = ReadCsvFile(csvFilePath);
 
-            // Read data from XLSX file and save to DataSet
-            DataSet xlsxDataSet = ReadXlsxFile(xlsxFilePath);
-
-            // Bind the data to DataGrids
-            csvDataGrid.ItemsSource = csvDataSet.Tables[0].DefaultView;
-            xlsxDataGrid.ItemsSource = xlsxDataSet.Tables[0].DefaultView;
- 
- 
- 
- 
- 
- 
- 
- 
- 
- */

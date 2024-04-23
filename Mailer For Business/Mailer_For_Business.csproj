@@ -26,9 +26,21 @@
   <ItemGroup>
     <None Remove="Windows\Dash\btn.png" />
     <None Remove="Windows\Dash\header\bluedark.jpg" />
+    <None Remove="Windows\Dash\header\blueheaderdarkmode.png" />
+    <None Remove="Windows\Dash\header\blueheaderlightmode.png" />
     <None Remove="Windows\Dash\header\bluelight.jpg" />
+    <None Remove="Windows\Dash\header\greenheaderdarkmode.png" />
+    <None Remove="Windows\Dash\header\greenheaderlightmode.png" />
     <None Remove="Windows\Dash\header\red.jpg" />
     <None Remove="Windows\Dash\draganddrop.png" />
+    <None Remove="Windows\Dash\header\redheaderdarkmode.png" />
+    <None Remove="Windows\Dash\header\redheaderlightmode.png" />
+    <None Remove="Windows\Dash\htmltemp\blueheaderdarkmode.html" />
+    <None Remove="Windows\Dash\htmltemp\blueheaderlightmode.html" />
+    <None Remove="Windows\Dash\htmltemp\greenheaderdarkmode.html" />
+    <None Remove="Windows\Dash\htmltemp\greenheaderlightmode.html" />
+    <None Remove="Windows\Dash\htmltemp\redheaderdarkmode.html" />
+    <None Remove="Windows\Dash\htmltemp\redheaderlightmode.html" />
     <None Remove="Windows\Dash\htmltemp\testmail.html" />
     <None Remove="Windows\Dash\Images\loading_video.png" />
     <None Remove="Windows\Dash\massage.png" />
@@ -42,6 +54,24 @@
 
   <ItemGroup>
     <Content Include="mailer_logo.ico" />
+    <Content Include="Windows\Dash\htmltemp\blueheaderdarkmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Windows\Dash\htmltemp\blueheaderlightmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Windows\Dash\htmltemp\greenheaderdarkmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Windows\Dash\htmltemp\greenheaderlightmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Windows\Dash\htmltemp\redheaderdarkmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Windows\Dash\htmltemp\redheaderlightmode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -59,11 +89,17 @@
 
   <ItemGroup>
     <Resource Include="Windows\Dash\header\bluedark.jpg" />
+    <Resource Include="Windows\Dash\header\blueheaderdarkmode.png" />
+    <Resource Include="Windows\Dash\header\blueheaderlightmode.png" />
     <Resource Include="Windows\Dash\header\bluelight.jpg" />
+    <Resource Include="Windows\Dash\header\greenheaderdarkmode.png" />
+    <Resource Include="Windows\Dash\header\greenheaderlightmode.png" />
     <Resource Include="Windows\Dash\header\red.jpg" />
     <Content Include="Windows\Dash\htmltemp\testmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Windows\Dash\header\redheaderdarkmode.png" />
+    <Resource Include="Windows\Dash\header\redheaderlightmode.png" />
     <Resource Include="Windows\Dash\Images\btn.png" />
     <Resource Include="Windows\Dash\Images\draganddrop.png" />
     <Resource Include="Windows\Dash\Images\loading_video.png" />
