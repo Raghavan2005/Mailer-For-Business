@@ -13,6 +13,7 @@
     <PackageIcon>logo.png</PackageIcon>
     <SignAssembly>False</SignAssembly>
     <StartupObject>Mailer_For_Business.App</StartupObject>
+    <Copyright>Raghavan2005.github.com</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
