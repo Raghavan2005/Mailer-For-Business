@@ -12,6 +12,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageIcon>logo.png</PackageIcon>
     <SignAssembly>False</SignAssembly>
+    <StartupObject>Mailer_For_Business.App</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

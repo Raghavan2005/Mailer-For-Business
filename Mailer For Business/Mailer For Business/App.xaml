@@ -1,8 +1,0 @@
-﻿<Application
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Mailer_For_Business"
-             xmlns:Dash="clr-namespace:Mailer_For_Business.Windows.Dash" x:Class="Mailer_For_Business.App"
-             StartupUri="/Windows/Loader/Loader.xaml">
-   
-</Application>
